@@ -1,0 +1,251 @@
+'use client'
+import { useState } from 'react'
+import { Phone, MapPin, Clock, Train, ChevronDown, Check, Send } from 'lucide-react'
+
+const FORMATIONS_CONTACT = [
+  { label: 'Permis B manuel 1 099€', id: 'bvm' },
+  { label: 'Permis B auto 899€', id: 'bva' },
+  { label: 'Accéléré 1 399€', id: 'accelere' },
+  { label: 'AAC 1 199€', id: 'aac' },
+  { label: 'Code seul 299€', id: 'code' },
+  { label: 'Permis à 1€/jour', id: 'permis1' },
+]
+
+const FINANCEMENTS_CONTACT = [
+  { label: 'CPF', id: 'cpf' },
+  { label: 'Aide Région IDF', id: 'region' },
+  { label: 'Permis 1€/jour', id: 'permis1' },
+  { label: 'Paiement 3x', id: 'x3' },
+  { label: 'Personnel', id: 'perso' },
+]
+
+const FAQS = [
+  { q: 'Combien de temps pour avoir le permis ?', a: 'En moyenne 2-3 mois. En accéléré, 3-4 semaines. Tout dépend de votre rythme et disponibilité.' },
+  { q: 'Puis-je utiliser mon CPF ?', a: 'Oui ! Nous sommes certifiés Qualiopi. Oumy vous aide dans toutes les démarches CPF, c\'est gratuit et simple.' },
+  { q: 'Avez-vous des facilités de paiement ?', a: 'Oui, paiement en plusieurs fois possible. CB, espèces, chèque, virement, CPF, permis 1€/jour — on s\'adapte à votre situation.' },
+  { q: 'Je veux convertir mon permis étranger ?', a: 'Nous accompagnons les titulaires de permis étrangers dans leurs démarches. Appelez-nous pour un devis personnalisé.' },
+]
+
+const CRENEAUX = ['10:00', '10:30', '11:00', '11:30', '13:00', '13:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30']
+
+function getMiniCalendar() {
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = today.getMonth()
+  const firstDay = new Date(year, month, 1).getDay()
+  const daysInMonth = new Date(year, month + 1, 0).getDate()
+  const days: (number | null)[] = []
+  const startOffset = firstDay === 0 ? 6 : firstDay - 1
+  for (let i = 0; i < startOffset; i++) days.push(null)
+  for (let i = 1; i <= daysInMonth; i++) days.push(i)
+  return { days, month: today.toLocaleString('fr-FR', { month: 'long', year: 'numeric' }) }
+}
+
+export default function ContactPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [selectedDay, setSelectedDay] = useState<number | null>(null)
+  const [selectedCreneau, setSelectedCreneau] = useState<string | null>(null)
+  const [selectedFormation, setSelectedFormation] = useState<string | null>(null)
+  const [selectedFinancement, setSelectedFinancement] = useState<string | null>(null)
+  const [form, setForm] = useState({ prenom: '', nom: '', tel: '', email: '', age: '' })
+  const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+
+  const { days, month } = getMiniCalendar()
+  const today = new Date().getDate()
+  const currentDayOfWeek = new Date().getDay()
+
+  function isDayClickable(day: number | null) {
+    if (!day) return false
+    const date = new Date()
+    date.setDate(day)
+    const dow = date.getDay()
+    return dow >= 2 && dow <= 6 && day >= today // Mar=2 à Sam=6
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setSending(true)
+    // Simulation envoi
+    await new Promise(r => setTimeout(r, 1500))
+    setSent(true)
+    setSending(false)
+  }
+
+  return (
+    <div className="min-h-screen bg-[#faf9f6]">
+      {/* Header */}
+      <section className="py-20 px-4 bg-[#f5f0eb]">
+        <div className="max-w-7xl mx-auto text-center">
+          <span className="font-mono text-xs text-[#c0451e] font-semibold tracking-widest uppercase">Contact</span>
+          <h1 className="font-serif text-4xl sm:text-5xl font-black text-[#1c1917] mt-2 mb-4">Prenons contact</h1>
+          <p className="text-[#57534e] text-lg max-w-xl mx-auto">Oumy vous recontactera sous 24h. Ou appelez directement au 01 82 83 31 26.</p>
+        </div>
+      </section>
+
+      <section id="contact-section" className="py-16 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+          {/* Colonne gauche */}
+          <div>
+            {/* Cartes contact */}
+            <div className="space-y-3 mb-10">
+              {[
+                { icon: <Phone className="w-5 h-5 text-[#c0451e]" />, label: 'Téléphone', value: '01 82 83 31 26', href: 'tel:0182833126' },
+                { icon: <MapPin className="w-5 h-5 text-[#c0451e]" />, label: 'Adresse', value: '127 boulevard Mortier, 75020 Paris', href: 'https://maps.google.com/?q=127+boulevard+Mortier+Paris' },
+                { icon: <Clock className="w-5 h-5 text-[#c0451e]" />, label: 'Horaires', value: 'Mar-Ven 10h-14h / 16h-19h · Sam 10h-14h', href: null },
+                { icon: <Train className="w-5 h-5 text-[#c0451e]" />, label: 'Accès', value: 'Tram T3b — Arrêt devant l\'auto-école', href: null },
+              ].map(({ icon, label, value, href }) => (
+                <div key={label} className="bg-white border border-[#e7e5e4] rounded-xl p-4 flex items-center gap-4 hover:translate-x-1 transition-transform">
+                  <div className="w-10 h-10 rounded-lg bg-[#c0451e]/10 flex items-center justify-center flex-shrink-0">{icon}</div>
+                  <div>
+                    <p className="text-xs text-[#a8a29e] font-medium mb-0.5">{label}</p>
+                    {href ? (
+                      <a href={href} target={href.startsWith('http') ? '_blank' : undefined} className="text-sm font-semibold text-[#1c1917] hover:text-[#c0451e] transition-colors">{value}</a>
+                    ) : (
+                      <p className="text-sm font-semibold text-[#1c1917]">{value}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* FAQ */}
+            <h2 className="font-serif text-xl font-black text-[#1c1917] mb-4">Questions fréquentes</h2>
+            <div className="space-y-2">
+              {FAQS.map((faq, i) => (
+                <div key={i} className="bg-white border border-[#e7e5e4] rounded-xl overflow-hidden">
+                  <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between p-4 text-left hover:bg-[#faf9f6] transition-colors">
+                    <span className="font-medium text-[#1c1917] text-sm pr-4">{faq.q}</span>
+                    <ChevronDown className={`w-4 h-4 text-[#a8a29e] flex-shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} />
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-4 pb-4 text-sm text-[#57534e] leading-relaxed border-t border-[#e7e5e4] pt-3">{faq.a}</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Colonne droite */}
+          <div>
+            {/* Mini calendrier */}
+            <div className="bg-white border border-[#e7e5e4] rounded-2xl p-6 mb-6">
+              <h2 className="font-serif text-xl font-black text-[#1c1917] mb-4">📅 Prendre rendez-vous</h2>
+              <p className="text-sm text-[#57534e] mb-4 capitalize font-medium">{month}</p>
+              <div className="grid grid-cols-7 gap-1 mb-2">
+                {['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'].map(d => (
+                  <div key={d} className="text-center text-xs font-semibold text-[#a8a29e] py-1">{d}</div>
+                ))}
+              </div>
+              <div className="grid grid-cols-7 gap-1 mb-4">
+                {days.map((day, i) => (
+                  <button key={i} onClick={() => isDayClickable(day) ? setSelectedDay(day) : null}
+                    className={`aspect-square flex items-center justify-center text-sm rounded-lg transition-colors ${!day ? 'invisible' : isDayClickable(day) ? selectedDay === day ? 'bg-[#c0451e] text-white font-bold' : 'hover:bg-[#c0451e]/10 text-[#1c1917] font-medium' : 'text-[#e7e5e4] cursor-default'}`}>
+                    {day}
+                  </button>
+                ))}
+              </div>
+
+              {selectedDay && (
+                <div>
+                  <p className="text-sm font-semibold text-[#1c1917] mb-3">Choisissez un créneau</p>
+                  <div className="flex flex-wrap gap-2">
+                    {CRENEAUX.map(c => (
+                      <button key={c} onClick={() => setSelectedCreneau(c)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${selectedCreneau === c ? 'bg-[#c0451e] text-white border-[#c0451e]' : 'border-[#e7e5e4] text-[#57534e] hover:border-[#c0451e]'}`}>
+                        {c}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {selectedDay && selectedCreneau && (
+                <a href="tel:0182833126"
+                  className="mt-4 w-full flex items-center justify-center gap-2 bg-[#c0451e] hover:bg-[#a83a18] text-white font-bold py-3 rounded-xl transition-colors text-sm">
+                  <Phone className="w-4 h-4" />
+                  Confirmer le {selectedDay} à {selectedCreneau}
+                </a>
+              )}
+            </div>
+
+            {/* Formulaire */}
+            <div className="bg-white border border-[#e7e5e4] rounded-2xl p-6">
+              <h2 className="font-serif text-xl font-black text-[#1c1917] mb-6">📝 Inscription en ligne</h2>
+
+              {sent ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 rounded-full bg-[#16a34a]/10 flex items-center justify-center mx-auto mb-4">
+                    <Check className="w-8 h-8 text-[#16a34a]" />
+                  </div>
+                  <h3 className="font-bold text-[#1c1917] mb-2">Demande envoyée !</h3>
+                  <p className="text-sm text-[#57534e]">Oumy vous recontactera sous 24h.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-[#57534e] mb-1.5">Prénom</label>
+                      <input type="text" required value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))}
+                        className="w-full px-3 py-2.5 border border-[#e7e5e4] rounded-[10px] text-sm focus:outline-none focus:border-[#c0451e] transition-colors" placeholder="Marie" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-[#57534e] mb-1.5">Nom</label>
+                      <input type="text" required value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))}
+                        className="w-full px-3 py-2.5 border border-[#e7e5e4] rounded-[10px] text-sm focus:outline-none focus:border-[#c0451e] transition-colors" placeholder="Dupont" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-[#57534e] mb-1.5">Téléphone</label>
+                    <input type="tel" required value={form.tel} onChange={e => setForm(f => ({ ...f, tel: e.target.value }))}
+                      className="w-full px-3 py-2.5 border border-[#e7e5e4] rounded-[10px] text-sm focus:outline-none focus:border-[#c0451e] transition-colors" placeholder="06 12 34 56 78" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-[#57534e] mb-1.5">Email</label>
+                    <input type="email" required value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                      className="w-full px-3 py-2.5 border border-[#e7e5e4] rounded-[10px] text-sm focus:outline-none focus:border-[#c0451e] transition-colors" placeholder="marie@email.com" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-[#57534e] mb-1.5">Âge</label>
+                    <input type="number" min={15} max={99} value={form.age} onChange={e => setForm(f => ({ ...f, age: e.target.value }))}
+                      className="w-full px-3 py-2.5 border border-[#e7e5e4] rounded-[10px] text-sm focus:outline-none focus:border-[#c0451e] transition-colors" placeholder="18" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-[#57534e] mb-2">Formation souhaitée</p>
+                    <div className="flex flex-wrap gap-2">
+                      {FORMATIONS_CONTACT.map(f => (
+                        <button key={f.id} type="button" onClick={() => setSelectedFormation(f.id)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${selectedFormation === f.id ? 'bg-[#c0451e] text-white border-[#c0451e]' : 'border-[#e7e5e4] text-[#57534e] hover:border-[#c0451e]'}`}>
+                          {f.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-[#57534e] mb-2">Financement</p>
+                    <div className="flex flex-wrap gap-2">
+                      {FINANCEMENTS_CONTACT.map(f => (
+                        <button key={f.id} type="button" onClick={() => setSelectedFinancement(f.id)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${selectedFinancement === f.id ? 'bg-[#c0451e] text-white border-[#c0451e]' : 'border-[#e7e5e4] text-[#57534e] hover:border-[#c0451e]'}`}>
+                          {f.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <button type="submit" disabled={sending}
+                    className="w-full flex items-center justify-center gap-2 bg-[#c0451e] hover:bg-[#a83a18] disabled:opacity-50 text-white font-bold py-4 rounded-xl transition-colors">
+                    <Send className="w-4 h-4" />
+                    {sending ? 'Envoi...' : 'Envoyer ma demande d\'inscription 🚀'}
+                  </button>
+                  <p className="text-xs text-[#a8a29e] text-center">Oumy te recontactera sous 24h</p>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
