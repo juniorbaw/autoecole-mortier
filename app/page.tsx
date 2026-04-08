@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { Phone, Star, Check, ArrowRight, MapPin, ChevronRight, Trophy, BookOpen, Car, FileText } from 'lucide-react'
+import { Phone, Star, Check, ArrowRight, MapPin, ChevronRight, Trophy, BookOpen, Car, FileText, Instagram } from 'lucide-react'
 
 // ── Compteur animé ───────────────────────────────────────────────────────────
 function AnimatedCounter({ target, suffix = '', decimals = 0 }: { target: number; suffix?: string; decimals?: number }) {
@@ -186,6 +186,17 @@ export default function HomePage() {
               <span>{text}</span>
             </div>
           ))}
+          <a
+            href="https://www.instagram.com/autoecole_mortier"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-[#c0451e] transition-colors"
+          >
+            <span className="w-6 h-6 rounded-md bg-gradient-to-br from-[#f97316] via-[#ec4899] to-[#8b5cf6] flex items-center justify-center">
+              <Instagram className="w-3.5 h-3.5 text-white" />
+            </span>
+            <span>@autoecole_mortier</span>
+          </a>
         </div>
       </section>
 
@@ -216,7 +227,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <span className="font-mono text-xs text-[#c0451e] font-semibold tracking-widest uppercase">Nos formations</span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-[#1c1917] mt-2">Choisis la formule qui te ressemble</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-[#1c1917] mt-2">Choisir la formule qui te ressemble</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {FORMATIONS_HOME.map(f => (
