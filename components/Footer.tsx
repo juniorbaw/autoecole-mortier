@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Phone, MapPin, Clock, Train } from 'lucide-react'
+import { Phone, MapPin, Clock, Train, Instagram } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -17,11 +17,22 @@ export default function Footer() {
             <p className="text-sm leading-relaxed mb-4">
               Votre auto-école de confiance dans le 20ème. Certifiée Qualiopi, finançable CPF, note 5.0/5.
             </p>
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-3 flex-wrap mb-4">
               {['Qualiopi', 'Garantie financière', 'Label qualité'].map(b => (
                 <span key={b} className="text-xs bg-white/10 text-white/60 px-2.5 py-1 rounded-full">{b}</span>
               ))}
             </div>
+            <a
+              href="https://www.instagram.com/autoecole_mortier"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors group"
+            >
+              <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f97316] via-[#ec4899] to-[#8b5cf6] flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Instagram className="w-4 h-4 text-white" />
+              </span>
+              @autoecole_mortier
+            </a>
           </div>
 
           {/* Navigation */}

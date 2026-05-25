@@ -404,6 +404,17 @@ export default function HomePage() {
               <span>{text}</span>
             </div>
           ))}
+          <a
+            href="https://www.instagram.com/autoecole_mortier"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-[#c0451e] transition-colors"
+          >
+            <span className="w-6 h-6 rounded-md bg-gradient-to-br from-[#f97316] via-[#ec4899] to-[#8b5cf6] flex items-center justify-center">
+              <Instagram className="w-3.5 h-3.5 text-white" />
+            </span>
+            <span>@autoecole_mortier</span>
+          </a>
         </div>
       </section>
 
