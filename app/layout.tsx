@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Auto-école Mortier — Paris 20ème",
-    description: "Permis B certifié Qualiopi, CPF accepté, permis à 1€/jour. Note 5.0/5 ⭐",
+    description: "Permis B certifié Qualiopi, CPF accepté, permis à 1€/jour. Note 5.0/5 sur Google.",
     images: ["https://autoecole-mortier.vercel.app/og-image.png"],
   },
   robots: {
@@ -94,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#c0451e" />
+        <meta name="theme-color" content="#2d6a4f" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Auto-école Mortier" />

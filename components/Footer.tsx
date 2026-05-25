@@ -3,16 +3,16 @@ import { Phone, MapPin, Clock, Train, Instagram } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1a1814] text-white/70 pt-16 pb-8">
+    <footer className="bg-[#0a1410] text-white/70 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-[#c0451e] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-xl bg-[#2d6a4f] flex items-center justify-center">
                 <span className="font-serif text-white font-bold text-lg">M</span>
               </div>
-              <span className="font-bold text-white text-sm">Mortier <span className="text-[#c0451e]">Auto-école</span></span>
+              <span className="font-bold text-white text-sm">Mortier <span className="text-[#2d6a4f]">Auto-école</span></span>
             </div>
             <p className="text-sm leading-relaxed mb-4">
               Votre auto-école de confiance dans le 20ème. Certifiée Qualiopi, finançable CPF, note 5.0/5.
@@ -67,10 +67,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-3">
-              <li><a href="tel:0182833126" className="flex items-center gap-2 text-sm hover:text-white transition-colors"><Phone className="w-4 h-4 text-[#c0451e]" />01 82 83 31 26</a></li>
-              <li className="flex items-start gap-2 text-sm"><MapPin className="w-4 h-4 text-[#c0451e] mt-0.5 flex-shrink-0" />127 bd Mortier, 75020 Paris</li>
-              <li className="flex items-start gap-2 text-sm"><Clock className="w-4 h-4 text-[#c0451e] mt-0.5 flex-shrink-0" />Mar-Ven 10h-14h / 16h-19h<br />Sam 10h-14h</li>
-              <li className="flex items-center gap-2 text-sm"><Train className="w-4 h-4 text-[#c0451e]" />Tram T3b — Arrêt devant</li>
+              <li><a href="tel:0182833126" className="flex items-center gap-2 text-sm hover:text-white transition-colors"><Phone className="w-4 h-4 text-[#2d6a4f]" />01 82 83 31 26</a></li>
+              <li className="flex items-start gap-2 text-sm"><MapPin className="w-4 h-4 text-[#2d6a4f] mt-0.5 flex-shrink-0" />127 bd Mortier, 75020 Paris</li>
+              <li className="flex items-start gap-2 text-sm"><Clock className="w-4 h-4 text-[#2d6a4f] mt-0.5 flex-shrink-0" />Mar-Ven 10h-14h / 16h-19h<br />Sam 10h-14h</li>
+              <li className="flex items-center gap-2 text-sm"><Train className="w-4 h-4 text-[#2d6a4f]" />Tram T3b — Arrêt devant</li>
             </ul>
           </div>
         </div>

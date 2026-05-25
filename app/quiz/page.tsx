@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, RotateCcw, Trophy, Star, Check, X, ArrowRight, Zap } from 'lucide-react'
+import { Phone, RotateCcw, Trophy, Star, Check, X, ArrowRight, Zap, TrafficCone, ClipboardList, Brain, BookOpen, Car, ThumbsUp, Award } from 'lucide-react'
 
 const QUESTIONS = [
   // Signalisation (10)
@@ -43,9 +43,9 @@ const QUESTIONS = [
 const LETTERS = ['A', 'B', 'C', 'D']
 
 const CATEGORIES = [
-  { key: 'Signalisation', emoji: '🚦', range: [0, 9] },
-  { key: 'Règles',        emoji: '📋', range: [10, 19] },
-  { key: 'Comportement', emoji: '🧠', range: [20, 29] },
+  { key: 'Signalisation', Icon: TrafficCone,    range: [0, 9] },
+  { key: 'Règles',        Icon: ClipboardList,  range: [10, 19] },
+  { key: 'Comportement',  Icon: Brain,          range: [20, 29] },
 ]
 
 export default function QuizPage() {
@@ -91,10 +91,10 @@ export default function QuizPage() {
   const progressWidth = ((current + (selected !== null ? 1 : 0)) / QUESTIONS.length) * 100
 
   function getResultConfig() {
-    if (percentage >= 80) return { label: 'Excellent ! Tu es prêt !',   emoji: '🏆', color: '#16a34a', grade: 'Expert' }
-    if (percentage >= 70) return { label: 'Très bien ! Presque prêt',   emoji: '🚗', color: '#0891b2', grade: 'Avancé' }
-    if (percentage >= 50) return { label: 'Bien, encore un effort !',   emoji: '👍', color: '#f59e0b', grade: 'Intermédiaire' }
-    return                         { label: 'Continue à réviser !',      emoji: '📚', color: '#c0451e', grade: 'Débutant' }
+    if (percentage >= 80) return { label: 'Excellent, vous êtes prêt',     Icon: Trophy,   color: '#16a34a', grade: 'Expert' }
+    if (percentage >= 70) return { label: 'Très bien, presque prêt',       Icon: Award,    color: '#0891b2', grade: 'Avancé' }
+    if (percentage >= 50) return { label: 'Bien, encore un effort',        Icon: ThumbsUp, color: '#f59e0b', grade: 'Intermédiaire' }
+    return                       { label: 'Continuez à réviser',           Icon: BookOpen, color: '#2d6a4f', grade: 'Débutant' }
   }
 
   const resultConfig = getResultConfig()
@@ -118,7 +118,7 @@ export default function QuizPage() {
             className="font-serif italic font-black mt-2 mb-2"
             style={{ color: 'var(--dark-text)', fontSize: 'clamp(2rem, 6vw, 3rem)' }}
           >
-            🎮 Quiz Code de la Route
+            Quiz du Code de la Route
           </h1>
           <p style={{ color: 'var(--secondary-text)' }}>30 questions · 3 catégories · Résultats instantanés</p>
         </motion.div>
@@ -140,12 +140,13 @@ export default function QuizPage() {
                 style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}
               >
                 <motion.div
-                  className="animate-celebrate inline-block"
+                  className="animate-celebrate inline-flex items-center justify-center rounded-full"
+                  style={{ width: '6rem', height: '6rem', backgroundColor: `${resultConfig.color}15` }}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 0.2 }}
                 >
-                  <span style={{ fontSize: '5rem' }}>{resultConfig.emoji}</span>
+                  <resultConfig.Icon className="w-12 h-12" style={{ color: resultConfig.color }} />
                 </motion.div>
 
                 <motion.div
@@ -200,15 +201,15 @@ export default function QuizPage() {
                   Résultats par catégorie
                 </h3>
                 <div className="space-y-5">
-                  {CATEGORIES.map(({ key, emoji }, i) => {
+                  {CATEGORIES.map(({ key, Icon }, i) => {
                     const catScore = scores[key] ?? 0
                     const catPct = (catScore / 10) * 100
-                    const catColor = catPct >= 70 ? '#16a34a' : catPct >= 50 ? '#f59e0b' : '#c0451e'
+                    const catColor = catPct >= 70 ? '#16a34a' : catPct >= 50 ? '#f59e0b' : '#2d6a4f'
                     return (
                       <div key={key}>
                         <div className="flex items-center justify-between mb-2">
                           <span className="flex items-center gap-2 text-sm font-semibold" style={{ color: 'var(--dark-text)' }}>
-                            <span>{emoji}</span> {key}
+                            <Icon className="w-4 h-4" style={{ color: catColor }} /> {key}
                           </span>
                           <span className="font-mono font-bold text-sm" style={{ color: catColor }}>
                             {catScore}/10
@@ -256,7 +257,7 @@ export default function QuizPage() {
                     backgroundColor: 'rgba(8,145,178,0.06)',
                   }}
                 >
-                  📚 Voir les formations
+                  <BookOpen className="w-4 h-4" /> Voir les formations
                 </Link>
                 <a
                   href="tel:0182833126"
@@ -457,7 +458,7 @@ export default function QuizPage() {
                   <div className="flex items-center gap-3">
                     {CATEGORIES.map(cat => (
                       <div key={cat.key} className="flex items-center gap-1 text-xs" style={{ color: 'var(--secondary-text)' }}>
-                        <span>{cat.emoji}</span>
+                        <cat.Icon className="w-3.5 h-3.5" style={{ color: 'var(--brand)' }} />
                         <span className="font-mono font-bold" style={{ color: 'var(--dark-text)' }}>
                           {scores[cat.key]}
                         </span>

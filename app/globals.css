@@ -8,26 +8,27 @@
 /* ============ DESIGN TOKENS ============ */
 
 :root {
-  /* Brand */
-  --brand: #c0451e;
-  --brand-dark: #a83a18;
-  --brand-light: #e05a30;
-  --brand-orange: #d86c36;
+  /* Brand — Eco premium green */
+  --brand: #2d6a4f;
+  --brand-dark: #1b4332;
+  --brand-light: #52b788;
+  --brand-orange: #40916c;
+  --brand-accent: #74c69d;
 
-  /* Backgrounds */
-  --bg-main: #faf9f6;
-  --bg-secondary: #f5f0eb;
+  /* Backgrounds — Sage cream */
+  --bg-main: #f7f9f5;
+  --bg-secondary: #eef2ec;
   --card-bg: #ffffff;
-  --nav-bg: rgba(250, 249, 246, 0.95);
+  --nav-bg: rgba(247, 249, 245, 0.95);
 
   /* Text */
-  --dark-text: #1c1917;
-  --secondary-text: #57534e;
-  --light-text: #a8a29e;
+  --dark-text: #1a2e22;
+  --secondary-text: #4a5a52;
+  --light-text: #8a9690;
 
   /* Border */
-  --border-color: #e7e5e4;
-  --border-light: #f0ece7;
+  --border-color: #dde5dc;
+  --border-light: #e8efe6;
 
   /* Semantic */
   --success: #16a34a;
@@ -46,17 +47,18 @@
 }
 
 [data-theme="dark"] {
-  /* Brand — légèrement plus brillant sur fond sombre */
-  --brand: #e05a30;
-  --brand-dark: #c0451e;
-  --brand-light: #f07050;
-  --brand-orange: #e07840;
+  /* Brand — vert plus lumineux sur fond sombre */
+  --brand: #52b788;
+  --brand-dark: #2d6a4f;
+  --brand-light: #74c69d;
+  --brand-orange: #40916c;
+  --brand-accent: #95d5b2;
 
-  /* Backgrounds — Cosmic black avec teinte verte */
-  --bg-main: #0a0f0b;
-  --bg-secondary: #0f1510;
-  --card-bg: #161c18;
-  --nav-bg: rgba(10, 15, 11, 0.95);
+  /* Backgrounds — Forest cosmic */
+  --bg-main: #0a1410;
+  --bg-secondary: #0d1812;
+  --card-bg: #142019;
+  --nav-bg: rgba(10, 20, 16, 0.95);
 
   /* Text — Gallery warm white */
   --dark-text: #f0ebe4;
@@ -167,9 +169,9 @@ body::before {
 }
 
 .glass-brand {
-  background: rgba(192, 69, 30, 0.15);
+  background: rgba(45, 106, 79, 0.15);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(192, 69, 30, 0.25);
+  border: 1px solid rgba(45, 106, 79, 0.25);
 }
 
 /* ============ ANIMATIONS ============ */
@@ -210,9 +212,9 @@ body::before {
 }
 
 @keyframes pulse-ring {
-  0%   { box-shadow: 0 0 0 0 rgba(192, 69, 30, 0.7); }
-  70%  { box-shadow: 0 0 0 10px rgba(192, 69, 30, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(192, 69, 30, 0); }
+  0%   { box-shadow: 0 0 0 0 rgba(45, 106, 79, 0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(45, 106, 79, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(45, 106, 79, 0); }
 }
 
 @keyframes shimmer {
@@ -356,7 +358,7 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(192, 69, 30, 0.12);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
 }
 
 /* ============ SCROLLBAR ============ */

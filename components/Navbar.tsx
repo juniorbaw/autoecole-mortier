@@ -55,7 +55,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
-            <div className="relative w-10 h-10 rounded-full bg-[#c0451e] flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300 overflow-hidden">
+            <div className="relative w-10 h-10 rounded-full bg-[#2d6a4f] flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300 overflow-hidden">
               <Image
                 src="/logo-mortier.png"
                 alt="Logo Mortier"
@@ -66,7 +66,7 @@ export default function Navbar() {
             </div>
             <div className="leading-tight hidden sm:block">
               <div className="font-bold text-sm" style={{ color: 'var(--dark-text)' }}>Mortier</div>
-              <div className="font-bold text-xs text-[#c0451e]">Auto-école</div>
+              <div className="font-bold text-xs text-[#2d6a4f]">Auto-école</div>
             </div>
           </Link>
 
@@ -119,7 +119,7 @@ export default function Navbar() {
             <a
               href="tel:0182833126"
               onClick={() => track('call_clicked', { location: 'navbar_desktop' })}
-              className="inline-flex items-center gap-2 bg-[#c0451e] hover:bg-[#a83a18] text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
+              className="inline-flex items-center gap-2 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
             >
               <Phone className="w-4 h-4" />
               <span className="hidden sm:inline">01 82 83 31 26</span>
@@ -130,7 +130,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={() => track('signup_clicked', { location: 'navbar_desktop' })}
-              className="inline-flex items-center justify-center px-4 py-2 border-2 border-[#c0451e] text-[#c0451e] hover:bg-[#c0451e] hover:text-white font-semibold rounded-lg transition-all duration-200 text-sm"
+              className="inline-flex items-center justify-center px-4 py-2 border-2 border-[#2d6a4f] text-[#2d6a4f] hover:bg-[#2d6a4f] hover:text-white font-semibold rounded-lg transition-all duration-200 text-sm"
             >
               S&apos;inscrire
             </Link>
@@ -173,12 +173,12 @@ export default function Navbar() {
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-white/10">
             <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
-              <div className="relative w-10 h-10 rounded-full bg-[#c0451e] flex items-center justify-center overflow-hidden">
+              <div className="relative w-10 h-10 rounded-full bg-[#2d6a4f] flex items-center justify-center overflow-hidden">
                 <Image src="/logo-mortier.png" alt="Logo Mortier" width={40} height={40} className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="font-bold text-white text-sm">Mortier</div>
-                <div className="text-[#c0451e] font-bold text-xs">Auto-école</div>
+                <div className="text-[#2d6a4f] font-bold text-xs">Auto-école</div>
               </div>
             </Link>
             <button
@@ -199,7 +199,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="px-6 py-4 text-lg font-semibold border-b border-white/5 transition-all duration-300"
                 style={{
-                  color: isActive(link.href) ? '#e05a30' : 'rgba(255,255,255,0.8)',
+                  color: isActive(link.href) ? '#52b788' : 'rgba(255,255,255,0.8)',
                   backgroundColor: isActive(link.href) ? 'rgba(255,255,255,0.05)' : 'transparent',
                   animation: `slideInDown 0.4s ease-out`,
                   animationDelay: `${index * 0.05}s`,
@@ -215,7 +215,7 @@ export default function Navbar() {
           <div className="p-6 space-y-3 border-t border-white/10">
             <a
               href="tel:0182833126"
-              className="flex items-center justify-center gap-2 bg-[#c0451e] hover:bg-[#a83a18] text-white font-bold w-full py-4 text-lg rounded-lg transition-colors"
+              className="flex items-center justify-center gap-2 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-bold w-full py-4 text-lg rounded-lg transition-colors"
             >
               <Phone className="w-5 h-5" />
               01 82 83 31 26

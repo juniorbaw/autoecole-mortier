@@ -9,72 +9,72 @@ export const metadata: Metadata = {
 
 export default function MentionsLegales() {
   return (
-    <div className="min-h-screen bg-[#faf9f6] py-16 px-4">
+    <div className="min-h-screen bg-[#f7f9f5] py-16 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <Link 
             href="/" 
-            className="inline-flex items-center gap-2 text-[#c0451e] hover:text-[#a83a18] font-medium mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-[#2d6a4f] hover:text-[#1b4332] font-medium mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Retour à l'accueil
           </Link>
-          <h1 className="font-serif text-4xl font-black text-[#1c1917] mb-4">
+          <h1 className="font-serif text-4xl font-black text-[#1a2e22] mb-4">
             Mentions légales
           </h1>
-          <p className="text-[#57534e]">
+          <p className="text-[#4a5a52]">
             Informations légales concernant l'Auto-école Mortier
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-[#e7e5e4] p-8 space-y-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-[#dde5dc] p-8 space-y-8">
           {/* Identification */}
           <section>
-            <h2 className="font-serif text-2xl font-bold text-[#1c1917] mb-4">
+            <h2 className="font-serif text-2xl font-bold text-[#1a2e22] mb-4">
               Identification de l'établissement
             </h2>
-            <div className="space-y-2 text-[#57534e]">
-              <p><strong className="text-[#1c1917]">Raison sociale :</strong> Auto-école Mortier</p>
-              <p><strong className="text-[#1c1917]">SIRET :</strong> 93345595800019</p>
-              <p><strong className="text-[#1c1917]">Adresse :</strong> 127 boulevard Mortier, 75020 Paris</p>
-              <p><strong className="text-[#1c1917]">Téléphone :</strong> 01 82 83 31 26</p>
-              <p><strong className="text-[#1c1917]">Email :</strong> autoecolemortier@gmail.com</p>
-              <p><strong className="text-[#1c1917]">Directeur de publication :</strong> Seyba D.</p>
+            <div className="space-y-2 text-[#4a5a52]">
+              <p><strong className="text-[#1a2e22]">Raison sociale :</strong> Auto-école Mortier</p>
+              <p><strong className="text-[#1a2e22]">SIRET :</strong> 93345595800019</p>
+              <p><strong className="text-[#1a2e22]">Adresse :</strong> 127 boulevard Mortier, 75020 Paris</p>
+              <p><strong className="text-[#1a2e22]">Téléphone :</strong> 01 82 83 31 26</p>
+              <p><strong className="text-[#1a2e22]">Email :</strong> autoecolemortier@gmail.com</p>
+              <p><strong className="text-[#1a2e22]">Directeur de publication :</strong> Seyba D.</p>
             </div>
           </section>
 
           {/* Certification */}
           <section>
-            <h2 className="font-serif text-2xl font-bold text-[#1c1917] mb-4">
+            <h2 className="font-serif text-2xl font-bold text-[#1a2e22] mb-4">
               Certification et agréments
             </h2>
-            <div className="space-y-2 text-[#57534e]">
-              <p><strong className="text-[#1c1917]">Certification Qualiopi :</strong> Actions de formation</p>
-              <p><strong className="text-[#1c1917]">Agrément préfectoral :</strong> E2002075200</p>
-              <p><strong className="text-[#1c1917]">Organisme de formation :</strong> 11755964675</p>
-              <p><strong className="text-[#1c1917]">Garantie financière :</strong> Assurée auprès de la MAAF</p>
+            <div className="space-y-2 text-[#4a5a52]">
+              <p><strong className="text-[#1a2e22]">Certification Qualiopi :</strong> Actions de formation</p>
+              <p><strong className="text-[#1a2e22]">Agrément préfectoral :</strong> E2002075200</p>
+              <p><strong className="text-[#1a2e22]">Organisme de formation :</strong> 11755964675</p>
+              <p><strong className="text-[#1a2e22]">Garantie financière :</strong> Assurée auprès de la MAAF</p>
             </div>
           </section>
 
           {/* Hébergement */}
           <section>
-            <h2 className="font-serif text-2xl font-bold text-[#1c1917] mb-4">
+            <h2 className="font-serif text-2xl font-bold text-[#1a2e22] mb-4">
               Hébergement du site web
             </h2>
-            <div className="space-y-2 text-[#57534e]">
-              <p><strong className="text-[#1c1917]">Hébergeur :</strong> Vercel Inc.</p>
-              <p><strong className="text-[#1c1917]">Adresse :</strong> 340 S Lemon Ave #4133, Walnut CA 91789, États-Unis</p>
-              <p><strong className="text-[#1c1917]">Site web :</strong> <a href="https://vercel.com" className="text-[#c0451e] hover:underline">vercel.com</a></p>
+            <div className="space-y-2 text-[#4a5a52]">
+              <p><strong className="text-[#1a2e22]">Hébergeur :</strong> Vercel Inc.</p>
+              <p><strong className="text-[#1a2e22]">Adresse :</strong> 340 S Lemon Ave #4133, Walnut CA 91789, États-Unis</p>
+              <p><strong className="text-[#1a2e22]">Site web :</strong> <a href="https://vercel.com" className="text-[#2d6a4f] hover:underline">vercel.com</a></p>
             </div>
           </section>
 
           {/* Propriété intellectuelle */}
           <section>
-            <h2 className="font-serif text-2xl font-bold text-[#1c1917] mb-4">
+            <h2 className="font-serif text-2xl font-bold text-[#1a2e22] mb-4">
               Propriété intellectuelle
             </h2>
-            <p className="text-[#57534e] leading-relaxed">
+            <p className="text-[#4a5a52] leading-relaxed">
               L'ensemble des contenus présents sur ce site (textes, images, logos, vidéos) sont la propriété 
               exclusive de l'Auto-école Mortier et sont protégés par les dispositions du Code de la propriété 
               intellectuelle. Toute reproduction, représentation, modification, publication, adaptation, 
@@ -85,10 +85,10 @@ export default function MentionsLegales() {
 
           {/* Protection des données */}
           <section>
-            <h2 className="font-serif text-2xl font-bold text-[#1c1917] mb-4">
+            <h2 className="font-serif text-2xl font-bold text-[#1a2e22] mb-4">
               Protection des données personnelles
             </h2>
-            <div className="space-y-4 text-[#57534e] leading-relaxed">
+            <div className="space-y-4 text-[#4a5a52] leading-relaxed">
               <p>
                 Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi 
                 "Informatique et Libertés", vous disposez d'un droit d'accès, de rectification, de 
@@ -108,10 +108,10 @@ export default function MentionsLegales() {
 
           {/* Responsabilité */}
           <section>
-            <h2 className="font-serif text-2xl font-bold text-[#1c1917] mb-4">
+            <h2 className="font-serif text-2xl font-bold text-[#1a2e22] mb-4">
               Limitation de responsabilité
             </h2>
-            <p className="text-[#57534e] leading-relaxed">
+            <p className="text-[#4a5a52] leading-relaxed">
               L'Auto-école Mortier s'efforce de fournir des informations aussi précises que possible sur ce site. 
               Toutefois, elle ne pourra être tenue responsable des omissions, des inexactitudes et des carences 
               dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui 
@@ -124,7 +124,7 @@ export default function MentionsLegales() {
         <div className="mt-12 text-center">
           <Link 
             href="/contact"
-            className="inline-flex items-center gap-2 bg-[#c0451e] hover:bg-[#a83a18] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
           >
             Une question ? Contactez-nous
           </Link>

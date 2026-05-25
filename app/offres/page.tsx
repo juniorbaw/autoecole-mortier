@@ -47,36 +47,36 @@ function SimulateurEconomies() {
   const { prixBase, reductions, prixFinal } = calculerPrix()
   
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-[#e7e5e4] p-8">
+    <div className="bg-white rounded-2xl shadow-lg border border-[#dde5dc] p-8">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-[#c0451e]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Calculator className="w-8 h-8 text-[#c0451e]" />
+        <div className="w-16 h-16 bg-[#2d6a4f]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Calculator className="w-8 h-8 text-[#2d6a4f]" />
         </div>
-        <h3 className="font-serif text-2xl font-black text-[#1c1917] mb-2">
-          💰 Combien tu économises chez Mortier ?
+        <h3 className="font-serif text-2xl font-black text-[#1a2e22] mb-2">
+          Combien économisez-vous chez Mortier ?
         </h3>
-        <p className="text-[#57534e]">Coche ce qui s'applique à toi</p>
+        <p className="text-[#4a5a52]">Coche ce qui s'applique à toi</p>
       </div>
       
       {/* Checkboxes profil */}
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         {[
-          { key: 'etudiant', label: '🎓 Je suis étudiant(e)', desc: 'Économie de 15%' },
-          { key: 'famille', label: '👨‍👩‍👧‍👦 Un membre de ma famille est déjà inscrit', desc: 'Économie de 20%' },
-          { key: 'parrainage', label: '🤝 J\'ai un code parrainage', desc: 'Économie de 50€' },
-          { key: 'jeune', label: '💶 J\'ai entre 15 et 25 ans', desc: 'Éligible permis à 1€/jour' },
-          { key: 'cpf', label: '🎓 Je veux utiliser mon CPF', desc: 'Jusqu\'à 100% financé' }
+          { key: 'etudiant', label: 'Je suis étudiant(e)', desc: 'Économie de 15%' },
+          { key: 'famille', label: 'Un membre de ma famille est déjà inscrit', desc: 'Économie de 20%' },
+          { key: 'parrainage', label: 'J\'ai un code parrainage', desc: 'Économie de 50€' },
+          { key: 'jeune', label: 'J\'ai entre 15 et 25 ans', desc: 'Éligible permis à 1€/jour' },
+          { key: 'cpf', label: 'Je veux utiliser mon CPF', desc: 'Jusqu\'à 100% financé' }
         ].map(({ key, label, desc }) => (
-          <label key={key} className="flex items-start gap-3 p-4 border border-[#e7e5e4] rounded-xl hover:bg-[#faf9f6] cursor-pointer transition-colors">
+          <label key={key} className="flex items-start gap-3 p-4 border border-[#dde5dc] rounded-xl hover:bg-[#f7f9f5] cursor-pointer transition-colors">
             <input
               type="checkbox"
               checked={profil[key as keyof typeof profil]}
               onChange={(e) => setProfil(prev => ({ ...prev, [key]: e.target.checked }))}
-              className="mt-1 w-4 h-4 text-[#c0451e] rounded"
+              className="mt-1 w-4 h-4 text-[#2d6a4f] rounded"
             />
             <div>
-              <div className="font-medium text-[#1c1917]">{label}</div>
-              <div className="text-sm text-[#57534e]">{desc}</div>
+              <div className="font-medium text-[#1a2e22]">{label}</div>
+              <div className="text-sm text-[#4a5a52]">{desc}</div>
             </div>
           </label>
         ))}
@@ -84,7 +84,7 @@ function SimulateurEconomies() {
       
       {/* Sélecteur formation */}
       <div className="mb-8">
-        <label className="block text-sm font-medium text-[#1c1917] mb-3">Formation souhaitée :</label>
+        <label className="block text-sm font-medium text-[#1a2e22] mb-3">Formation souhaitée :</label>
         <div className="flex flex-wrap gap-2">
           {Object.entries(formations).map(([key, { nom }]) => (
             <button
@@ -92,8 +92,8 @@ function SimulateurEconomies() {
               onClick={() => setFormation(key)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 formation === key 
-                  ? 'bg-[#c0451e] text-white' 
-                  : 'bg-[#f5f0eb] text-[#1c1917] hover:bg-[#e7e5e4]'
+                  ? 'bg-[#2d6a4f] text-white' 
+                  : 'bg-[#eef2ec] text-[#1a2e22] hover:bg-[#dde5dc]'
               }`}
             >
               {nom}
@@ -103,24 +103,24 @@ function SimulateurEconomies() {
       </div>
       
       {/* Résultat */}
-      <div className="bg-gradient-to-r from-[#c0451e]/10 to-[#c0451e]/5 rounded-xl p-6 text-center">
+      <div className="bg-gradient-to-r from-[#2d6a4f]/10 to-[#2d6a4f]/5 rounded-xl p-6 text-center">
         <div className="grid md:grid-cols-3 gap-4 mb-6">
           <div>
-            <div className="text-sm text-[#57534e]">Prix de base</div>
-            <div className="text-xl font-bold text-[#1c1917]">{prixBase}€</div>
+            <div className="text-sm text-[#4a5a52]">Prix de base</div>
+            <div className="text-xl font-bold text-[#1a2e22]">{prixBase}€</div>
           </div>
           <div>
-            <div className="text-sm text-[#57534e]">Tes réductions</div>
+            <div className="text-sm text-[#4a5a52]">Tes réductions</div>
             <div className="text-xl font-bold text-[#16a34a]">-{reductions}€</div>
           </div>
           <div>
-            <div className="text-sm text-[#57534e]">TON PRIX</div>
-            <div className="text-3xl font-black text-[#c0451e]">{prixFinal}€</div>
+            <div className="text-sm text-[#4a5a52]">TON PRIX</div>
+            <div className="text-3xl font-black text-[#2d6a4f]">{prixFinal}€</div>
           </div>
         </div>
         
         {prixFinal > 299 && (
-          <div className="text-sm text-[#57534e] mb-4">
+          <div className="text-sm text-[#4a5a52] mb-4">
             Ou seulement <strong>{Math.round(prixFinal / 3)}€/mois</strong> en 3x
             {profil.jeune && prixFinal > 800 && (
               <span> • Ou <strong>1€/jour</strong> si éligible</span>
@@ -129,7 +129,7 @@ function SimulateurEconomies() {
         )}
         
         <a href="tel:0182833126" 
-          className="inline-flex items-center gap-2 bg-[#c0451e] hover:bg-[#a83a18] text-white font-bold px-6 py-3 rounded-lg transition-colors">
+          className="inline-flex items-center gap-2 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-bold px-6 py-3 rounded-lg transition-colors">
           <Phone className="w-4 h-4" />
           Réserver avec ce prix — 01 82 83 31 26
         </a>
@@ -163,21 +163,21 @@ export default function OffresPage() {
   }, [])
   
   return (
-    <div className="min-h-screen bg-[#faf9f6]">
+    <div className="min-h-screen bg-[#f7f9f5]">
       {/* Hero */}
-      <section className="py-24 px-4 bg-gradient-to-b from-[#f5f0eb] to-[#faf9f6]">
+      <section className="py-24 px-4 bg-gradient-to-b from-[#eef2ec] to-[#f7f9f5]">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-[#c0451e]/10 text-[#c0451e] text-sm font-medium px-4 py-2 rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 bg-[#2d6a4f]/10 text-[#2d6a4f] text-sm font-medium px-4 py-2 rounded-full mb-8">
             <Trophy className="w-4 h-4" />
             4 programmes d'acquisition
           </div>
           
-          <h1 className="font-serif text-5xl md:text-6xl font-black text-[#1c1917] mb-6">
+          <h1 className="font-serif text-5xl md:text-6xl font-black text-[#1a2e22] mb-6">
             Des offres pensées<br />
-            <span className="text-[#c0451e]">pour toi</span>
+            <span className="text-[#2d6a4f]">pour toi</span>
           </h1>
           
-          <p className="text-xl text-[#57534e] mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-[#4a5a52] mb-8 max-w-2xl mx-auto">
             Parrainage, réductions étudiants, offre famille... On veut que le prix ne soit jamais un frein.
           </p>
         </div>
@@ -189,19 +189,19 @@ export default function OffresPage() {
           <div className="grid md:grid-cols-2 gap-8">
             
             {/* Carte 1 : Parrainage */}
-            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-[#c0451e] p-8 relative overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-[#2d6a4f] p-8 relative overflow-hidden">
               <div className="absolute top-4 right-4 bg-[#16a34a] text-white text-xs font-bold px-2 py-1 rounded">
                 ROI 16x
               </div>
-              <div className="w-12 h-12 bg-[#c0451e]/10 rounded-full flex items-center justify-center mb-6">
-                <Users className="w-6 h-6 text-[#c0451e]" />
+              <div className="w-12 h-12 bg-[#2d6a4f]/10 rounded-full flex items-center justify-center mb-6">
+                <Users className="w-6 h-6 text-[#2d6a4f]" />
               </div>
               
-              <h3 className="font-serif text-xl font-black text-[#1c1917] mb-4">
-                🤝 PARRAINAGE DOUBLE BONUS
+              <h3 className="font-serif text-xl font-black text-[#1a2e22] mb-4">
+                Parrainage double bonus
               </h3>
               
-              <p className="text-[#c0451e] font-bold text-lg mb-6">
+              <p className="text-[#2d6a4f] font-bold text-lg mb-6">
                 Parraine un ami, gagnez 50€ chacun
               </p>
               
@@ -216,9 +216,9 @@ export default function OffresPage() {
                 </li>
               </ul>
               
-              <div className="bg-[#faf9f6] rounded-lg p-4 mb-6">
-                <div className="text-xs font-bold text-[#1c1917] mb-2">PALIERS SUPER PARRAIN :</div>
-                <div className="space-y-1 text-xs text-[#57534e]">
+              <div className="bg-[#f7f9f5] rounded-lg p-4 mb-6">
+                <div className="text-xs font-bold text-[#1a2e22] mb-2">PALIERS SUPER PARRAIN :</div>
+                <div className="space-y-1 text-xs text-[#4a5a52]">
                   <div className="flex justify-between">
                     <span>3 filleuls →</span>
                     <span className="font-medium">+1h gratuite</span>
@@ -229,13 +229,13 @@ export default function OffresPage() {
                   </div>
                   <div className="flex justify-between">
                     <span>10 filleuls →</span>
-                    <span className="font-medium text-[#c0451e]">Conversion BVA offerte (349€)</span>
+                    <span className="font-medium text-[#2d6a4f]">Conversion BVA offerte (349€)</span>
                   </div>
                 </div>
               </div>
               
               <a href="tel:0182833126" 
-                className="block w-full bg-[#c0451e] hover:bg-[#a83a18] text-white font-semibold py-3 rounded-lg text-center transition-colors">
+                className="block w-full bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-semibold py-3 rounded-lg text-center transition-colors">
                 Demander mon code parrain
               </a>
             </div>
@@ -246,35 +246,35 @@ export default function OffresPage() {
                 <GraduationCap className="w-6 h-6 text-blue-500" />
               </div>
               
-              <h3 className="font-serif text-xl font-black text-[#1c1917] mb-4">
-                🎓 OFFRE ÉTUDIANTS -15%
+              <h3 className="font-serif text-xl font-black text-[#1a2e22] mb-4">
+                Offre étudiants — 15%
               </h3>
               
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-[#57534e]">Permis B Manuel :</span>
+                  <span className="text-sm text-[#4a5a52]">Permis B Manuel :</span>
                   <div className="text-right">
-                    <span className="text-sm line-through text-[#a8a29e]">1 099€</span>
-                    <div className="font-bold text-[#c0451e]">935€</div>
+                    <span className="text-sm line-through text-[#8a9690]">1 099€</span>
+                    <div className="font-bold text-[#2d6a4f]">935€</div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-[#57534e]">Permis B Auto :</span>
+                  <span className="text-sm text-[#4a5a52]">Permis B Auto :</span>
                   <div className="text-right">
-                    <span className="text-sm line-through text-[#a8a29e]">899€</span>
-                    <div className="font-bold text-[#c0451e]">765€</div>
+                    <span className="text-sm line-through text-[#8a9690]">899€</span>
+                    <div className="font-bold text-[#2d6a4f]">765€</div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-[#57534e]">Code seul :</span>
+                  <span className="text-sm text-[#4a5a52]">Code seul :</span>
                   <div className="text-right">
-                    <span className="text-sm line-through text-[#a8a29e]">299€</span>
-                    <div className="font-bold text-[#c0451e]">255€</div>
+                    <span className="text-sm line-through text-[#8a9690]">299€</span>
+                    <div className="font-bold text-[#2d6a4f]">255€</div>
                   </div>
                 </div>
               </div>
               
-              <p className="text-xs text-[#57534e] mb-4">
+              <p className="text-xs text-[#4a5a52] mb-4">
                 Condition : carte étudiante valide<br />
                 Non cumulable avec le parrainage
               </p>
@@ -291,26 +291,26 @@ export default function OffresPage() {
                 <Heart className="w-6 h-6 text-amber-500" />
               </div>
               
-              <h3 className="font-serif text-xl font-black text-[#1c1917] mb-4">
-                👨‍👩‍👧‍👦 OFFRE FAMILLE
+              <h3 className="font-serif text-xl font-black text-[#1a2e22] mb-4">
+                Offre famille
               </h3>
               
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-[#57534e]">1er enfant :</span>
-                  <span className="font-bold text-[#1c1917]">Prix normal</span>
+                  <span className="text-sm text-[#4a5a52]">1er enfant :</span>
+                  <span className="font-bold text-[#1a2e22]">Prix normal</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-[#57534e]">2ème enfant :</span>
-                  <span className="font-bold text-[#c0451e]">-20% (879€)</span>
+                  <span className="text-sm text-[#4a5a52]">2ème enfant :</span>
+                  <span className="font-bold text-[#2d6a4f]">-20% (879€)</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-[#57534e]">3ème enfant :</span>
-                  <span className="font-bold text-[#c0451e]">-25% (824€)</span>
+                  <span className="text-sm text-[#4a5a52]">3ème enfant :</span>
+                  <span className="font-bold text-[#2d6a4f]">-25% (824€)</span>
                 </div>
               </div>
               
-              <p className="text-center text-sm font-medium text-[#57534e] mb-6">
+              <p className="text-center text-sm font-medium text-[#4a5a52] mb-6">
                 "La meilleure auto-école pour toute la famille"
               </p>
               
@@ -326,8 +326,8 @@ export default function OffresPage() {
                 <Trophy className="w-6 h-6 text-amber-500" />
               </div>
               
-              <h3 className="font-serif text-xl font-black text-[#1c1917] mb-4">
-                🏆 PREMIER DE LA CLASSE
+              <h3 className="font-serif text-xl font-black text-[#1a2e22] mb-4">
+                Premier de la classe
               </h3>
               
               <p className="text-amber-600 font-bold mb-4">
@@ -336,11 +336,11 @@ export default function OffresPage() {
               
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-2 text-sm">
-                  <div className="w-6 h-6 bg-[#c0451e] text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
+                  <div className="w-6 h-6 bg-[#2d6a4f] text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
                   <span>Passe ton permis</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <div className="w-6 h-6 bg-[#c0451e] text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
+                  <div className="w-6 h-6 bg-[#2d6a4f] text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
                   <span>Réussis du 1er coup</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
@@ -361,7 +361,7 @@ export default function OffresPage() {
       </section>
 
       {/* Simulateur d'économies */}
-      <section className="py-16 px-4 bg-[#f5f0eb]">
+      <section className="py-16 px-4 bg-[#eef2ec]">
         <div className="max-w-4xl mx-auto">
           <SimulateurEconomies />
         </div>
@@ -370,18 +370,18 @@ export default function OffresPage() {
       {/* CTA Final */}
       <section className="py-16 px-4">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-serif text-3xl font-black text-[#1c1917] mb-4">
+          <h2 className="font-serif text-3xl font-black text-[#1a2e22] mb-4">
             Une offre te correspond ?
           </h2>
-          <p className="text-[#57534e] mb-8">
+          <p className="text-[#4a5a52] mb-8">
             Oumy calcule avec toi la meilleure combinaison pour ton budget.
           </p>
           <a href="tel:0182833126" 
-            className="inline-flex items-center gap-2 bg-[#c0451e] hover:bg-[#a83a18] text-white font-bold px-8 py-4 rounded-xl transition-colors text-lg">
+            className="inline-flex items-center gap-2 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-bold px-8 py-4 rounded-xl transition-colors text-lg">
             <Phone className="w-5 h-5" />
             Appeler Oumy — 01 82 83 31 26
           </a>
-          <p className="text-xs text-[#a8a29e] mt-3">
+          <p className="text-xs text-[#8a9690] mt-3">
             Conseil gratuit • Sans engagement • Disponible maintenant
           </p>
         </div>

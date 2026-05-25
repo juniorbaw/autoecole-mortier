@@ -11,9 +11,9 @@ export default function MobileBar() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden">
-      <div className="m-3 bg-[#1a1814]/95 backdrop-blur-md rounded-2xl p-3 flex gap-2 shadow-2xl border border-white/10">
+      <div className="m-3 bg-[#0a1410]/95 backdrop-blur-md rounded-2xl p-3 flex gap-2 shadow-2xl border border-white/10">
         <a href="tel:0182833126"
-          className="flex-1 flex items-center justify-center gap-2 bg-[#c0451e] hover:bg-[#a83a18] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+          className="flex-1 flex items-center justify-center gap-2 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-semibold py-3 rounded-xl transition-colors text-sm">
           <Phone className="w-4 h-4" />
           Appeler
         </a>

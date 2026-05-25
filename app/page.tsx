@@ -5,6 +5,8 @@ import { motion, useInView } from 'framer-motion'
 import {
   Phone, Star, Check, ArrowRight, MapPin, ChevronRight,
   Quote, Leaf, Shield, Award, Zap, Clock, Users, TrendingUp,
+  Car, Rocket, Trophy, BookOpen, GraduationCap, Wallet,
+  Euro, FileText, MessageCircle, BarChart3, Sparkles,
 } from 'lucide-react'
 
 // ── Compteur animé ───────────────────────────────────────────────────────────
@@ -30,68 +32,11 @@ function AnimatedCounter({ target, suffix = '', decimals = 0 }: { target: number
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const AVATARS = [
-  { initials: 'OK', bg: '#c0451e' },
+  { initials: 'OK', bg: '#2d6a4f' },
   { initials: 'MM', bg: '#6366f1' },
   { initials: 'SB', bg: '#0891b2' },
   { initials: 'KK', bg: '#16a34a' },
   { initials: 'JB', bg: '#f59e0b' },
-]
-
-const BENTO_ITEMS = [
-  {
-    id: 'satisfaction',
-    colSpan: 'md:col-span-2',
-    rowSpan: '',
-    bg: 'bg-[#c0451e]',
-    textColor: 'text-white',
-    value: '96%',
-    label: 'Taux de satisfaction',
-    desc: 'Nos élèves recommandent l\'auto-école Mortier à leurs proches.',
-    icon: <Users className="w-8 h-8 text-white/40" />,
-    accent: 'big',
-  },
-  {
-    id: 'qualiopi',
-    colSpan: 'md:col-span-1',
-    bg: 'glass',
-    value: '🏅',
-    label: 'Qualiopi',
-    desc: 'Certification nationale qualité formation',
-    icon: null,
-    accent: 'icon',
-  },
-  {
-    id: 'cpf',
-    colSpan: 'md:col-span-1',
-    bg: 'glass',
-    value: '💰',
-    label: 'CPF accepté',
-    desc: 'Financement 100% via votre compte formation',
-    icon: null,
-    accent: 'icon',
-  },
-  {
-    id: 'google',
-    colSpan: 'md:col-span-1',
-    bg: 'glass',
-    value: '5.0',
-    suffix: '/5',
-    label: 'Note Google',
-    desc: '26 avis vérifiés',
-    icon: null,
-    accent: 'rating',
-  },
-  {
-    id: 'permis1',
-    colSpan: 'md:col-span-1',
-    bg: 'glass',
-    value: '1€',
-    suffix: '/jour',
-    label: 'Permis à 1€',
-    desc: 'Prêt à taux zéro accessible',
-    icon: null,
-    accent: 'price',
-  },
 ]
 
 const ECO_KPIS = [
@@ -121,17 +66,17 @@ const TEMOIGNAGES = [
 
 const FORMATIONS_HOME = [
   {
-    emoji: '🚗', tag: 'Best-seller', tagBg: 'bg-[#c0451e]/10 text-[#c0451e]',
+    Icon: Car, tag: 'Best-seller', tagBg: 'bg-[#2d6a4f]/10 text-[#2d6a4f]',
     title: 'Permis B Manuel', desc: 'La formation complète : code + 20h minimum de conduite.',
     price: '1 099€', unit: '/ forfait 20h',
   },
   {
-    emoji: '⚡', tag: 'Spécialité', tagBg: 'bg-blue-100 text-blue-700',
+    Icon: Zap, tag: 'Spécialité', tagBg: 'bg-blue-100 text-blue-700',
     title: 'Permis B Automatique', desc: 'Notre spécialité ! 13h minimum, plus simple et rapide.',
     price: '899€', unit: '/ forfait 13h',
   },
   {
-    emoji: '🚀', tag: 'Tendance', tagBg: 'bg-amber-100 text-amber-700',
+    Icon: Rocket, tag: 'Tendance', tagBg: 'bg-amber-100 text-amber-700',
     title: 'Formule Accélérée', desc: 'Code + conduite intensive en 2 à 4 semaines seulement.',
     price: '1 399€', unit: '/ tout inclus',
   },
@@ -145,17 +90,17 @@ const FORMATIONS_SIM = [
 ]
 
 const FINANCEMENTS = [
-  { label: '💰 CPF', id: 'cpf' },
-  { label: '💶 Permis 1€/jour', id: 'permis1' },
-  { label: '💳 Paiement 3x', id: 'x3' },
-  { label: '💵 Je paie moi-même', id: 'perso' },
+  { label: 'CPF', id: 'cpf' },
+  { label: 'Permis 1€/jour', id: 'permis1' },
+  { label: 'Paiement 3x', id: 'x3' },
+  { label: 'Paiement personnel', id: 'perso' },
 ]
 
 const STEPS = [
-  { icon: '📝', label: 'Inscription', done: true },
-  { icon: '📚', label: 'Code', done: true },
-  { icon: '🚗', label: 'Conduite', done: false },
-  { icon: '🏆', label: 'Permis !', done: false },
+  { Icon: FileText,       label: 'Inscription', done: true },
+  { Icon: BookOpen,       label: 'Code',        done: true },
+  { Icon: Car,            label: 'Conduite',    done: false },
+  { Icon: Trophy,         label: 'Permis',      done: false },
 ]
 
 // ── Animation variants ───────────────────────────────────────────────────────
@@ -182,7 +127,7 @@ export default function HomePage() {
     if (simFinancement === 'cpf')    return { main: '0€',                 sub: 'Finançable à 100% par votre CPF',            color: '#16a34a' }
     if (simFinancement === 'permis1') return { main: `~${Math.round(price / 36)}€/mois`, sub: 'Prêt à taux zéro — ~36 mois', color: '#0891b2' }
     if (simFinancement === 'x3')     return { main: `${Math.round(price / 3)}€/mois`,   sub: `Paiement en 3 fois — ${price}€ total`, color: '#6366f1' }
-    return { main: `${price}€`, sub: 'Paiement comptant', color: '#c0451e' }
+    return { main: `${price}€`, sub: 'Paiement comptant', color: '#2d6a4f' }
   }
 
   const simResult = getSimResult()
@@ -196,7 +141,7 @@ export default function HomePage() {
       <section className="min-h-screen flex items-center py-24 px-6 relative overflow-hidden">
         {/* Floating orbs */}
         <div className="absolute top-24 -left-40 w-96 h-96 rounded-full opacity-40 float-circle"
-          style={{ background: 'radial-gradient(circle, rgba(192,69,30,0.12) 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(45,106,79,0.12) 0%, transparent 70%)' }} />
         <div className="absolute bottom-24 -right-40 w-[500px] h-[500px] rounded-full opacity-30 animate-float-reverse"
           style={{ background: 'radial-gradient(circle, rgba(22,163,74,0.1) 0%, transparent 70%)' }} />
 
@@ -214,8 +159,8 @@ export default function HomePage() {
                 className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full mb-6 pulse-badge"
                 style={{
                   color: 'var(--brand)',
-                  backgroundColor: 'rgba(192,69,30,0.08)',
-                  border: '1px solid rgba(192,69,30,0.2)',
+                  backgroundColor: 'rgba(45,106,79,0.08)',
+                  border: '1px solid rgba(45,106,79,0.2)',
                 }}
               >
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--brand)' }} />
@@ -272,7 +217,8 @@ export default function HomePage() {
                   backgroundColor: 'var(--card-bg)',
                 }}
               >
-                🎮 Quiz gratuit (3 min)
+                <Sparkles className="w-4 h-4" />
+                Quiz gratuit · 3 min
               </Link>
             </motion.div>
 
@@ -321,25 +267,26 @@ export default function HomePage() {
               </div>
 
               <h2
-                className="font-semibold mb-6 text-xs uppercase tracking-widest font-mono"
+                className="font-semibold mb-6 text-xs uppercase tracking-widest font-mono flex items-center gap-2"
                 style={{ color: 'var(--secondary-text)' }}
               >
-                📊 Nos résultats
+                <BarChart3 className="w-3.5 h-3.5" />
+                Nos résultats
               </h2>
 
               <div className="grid grid-cols-2 gap-3 mb-6">
                 {[
-                  { emoji: '⭐', value: 5.0, suffix: '/5',  label: 'Note moyenne',    decimals: 1 },
-                  { emoji: '🏆', value: 96,  suffix: '%',   label: 'Satisfaction',    decimals: 0 },
-                  { emoji: '💶', value: 1,   suffix: '€/j', label: 'Permis à 1€',     decimals: 0 },
-                  { emoji: '💬', value: 26,  suffix: '',    label: 'Avis vérifiés',   decimals: 0 },
-                ].map(({ emoji, value, suffix, label, decimals }) => (
+                  { Icon: Star,           value: 5.0, suffix: '/5',  label: 'Note moyenne',    decimals: 1 },
+                  { Icon: Trophy,         value: 96,  suffix: '%',   label: 'Satisfaction',    decimals: 0 },
+                  { Icon: Euro,           value: 1,   suffix: '€/j', label: 'Permis à 1€',     decimals: 0 },
+                  { Icon: MessageCircle,  value: 26,  suffix: '',    label: 'Avis vérifiés',   decimals: 0 },
+                ].map(({ Icon, value, suffix, label, decimals }) => (
                   <div
                     key={label}
                     className="rounded-xl p-4 text-center hover:shadow-md transition-shadow"
                     style={{ backgroundColor: 'var(--bg-secondary)' }}
                   >
-                    <div className="text-2xl mb-2">{emoji}</div>
+                    <Icon className="w-5 h-5 mx-auto mb-2" style={{ color: 'var(--brand)' }} />
                     <div className="text-2xl font-extrabold leading-none mb-1 font-serif"
                       style={{ color: 'var(--brand)' }}>
                       <AnimatedCounter target={value} suffix={suffix} decimals={decimals} />
@@ -372,7 +319,7 @@ export default function HomePage() {
                 color: 'var(--dark-text)',
               }}
             >
-              <span className="text-lg">🚗</span>
+              <Car className="w-4 h-4" style={{ color: 'var(--brand)' }} />
               Permis en ~3 semaines
             </div>
           </motion.div>
@@ -392,15 +339,15 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-10 text-sm font-medium"
           style={{ color: 'var(--secondary-text)' }}>
           {[
-            { icon: '🏅', text: 'Qualiopi certifié' },
-            { icon: '💰', text: 'CPF accepté' },
-            { icon: '🛡️', text: 'Garantie financière' },
-            { icon: '🎓', text: 'Label qualité état' },
-            { icon: '💶', text: 'Permis 1€/jour' },
-            { icon: '⭐', text: '5.0/5 Google' },
-          ].map(({ icon, text }) => (
+            { Icon: Award,          text: 'Qualiopi certifié' },
+            { Icon: Wallet,         text: 'CPF accepté' },
+            { Icon: Shield,         text: 'Garantie financière' },
+            { Icon: GraduationCap,  text: 'Label qualité état' },
+            { Icon: Euro,           text: 'Permis 1€/jour' },
+            { Icon: Star,           text: '5.0/5 Google' },
+          ].map(({ Icon, text }) => (
             <div key={text} className="flex items-center gap-2">
-              <span className="text-lg">{icon}</span>
+              <Icon className="w-4 h-4" style={{ color: 'var(--brand)' }} />
               <span>{text}</span>
             </div>
           ))}
@@ -408,7 +355,7 @@ export default function HomePage() {
             href="https://www.instagram.com/autoecole_mortier"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-[#c0451e] transition-colors"
+            className="flex items-center gap-2 hover:text-[#2d6a4f] transition-colors"
           >
             <span className="w-6 h-6 rounded-md bg-gradient-to-br from-[#f97316] via-[#ec4899] to-[#8b5cf6] flex items-center justify-center">
               <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
@@ -449,7 +396,7 @@ export default function HomePage() {
 
             {/* Large card — satisfaction */}
             <motion.div
-              className="md:col-span-2 bg-[#c0451e] rounded-2xl p-8 relative overflow-hidden"
+              className="md:col-span-2 bg-[#2d6a4f] rounded-2xl p-8 relative overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -481,7 +428,7 @@ export default function HomePage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ y: -4 }}
             >
-              <div className="text-4xl mb-4">🏅</div>
+              <Award className="w-10 h-10 mb-4" style={{ color: 'var(--brand)' }} />
               <div>
                 <h3 className="font-bold text-lg mb-1" style={{ color: 'var(--dark-text)' }}>Qualiopi Certifié</h3>
                 <p className="text-sm" style={{ color: 'var(--secondary-text)' }}>Certification qualité nationale — gage d&apos;excellence pédagogique</p>
@@ -497,7 +444,7 @@ export default function HomePage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ y: -4 }}
             >
-              <div className="text-4xl mb-4">💰</div>
+              <Wallet className="w-10 h-10 mb-4" style={{ color: 'var(--brand)' }} />
               <div>
                 <h3 className="font-bold text-lg mb-1" style={{ color: 'var(--dark-text)' }}>CPF Accepté</h3>
                 <p className="text-sm" style={{ color: 'var(--secondary-text)' }}>Financement 100% possible via votre compte formation</p>
@@ -539,7 +486,7 @@ export default function HomePage() {
               transition={{ duration: 0.5, delay: 0.4 }}
               whileHover={{ y: -4 }}
             >
-              <div className="text-4xl mb-4">💶</div>
+              <Euro className="w-10 h-10 mb-4" style={{ color: 'var(--brand)' }} />
               <div>
                 <div className="font-serif font-black text-3xl mb-1" style={{ color: 'var(--brand)' }}>
                   1€<span className="text-base font-semibold">/jour</span>
@@ -590,7 +537,9 @@ export default function HomePage() {
                   }}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <span className="text-4xl">{f.emoji}</span>
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+                      <f.Icon className="w-6 h-6" style={{ color: 'var(--brand)' }} />
+                    </div>
                     <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${f.tagBg}`}>{f.tag}</span>
                   </div>
                   <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--dark-text)' }}>{f.title}</h3>
@@ -643,7 +592,7 @@ export default function HomePage() {
               Simulateur
             </span>
             <h2 className="font-serif italic font-black mt-2" style={{ color: 'var(--dark-text)', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
-              💰 Calcule ton budget
+              Calculez votre budget
             </h2>
             <p className="mt-2" style={{ color: 'var(--secondary-text)' }}>En 30 secondes, sans inscription</p>
           </motion.div>
@@ -961,7 +910,7 @@ export default function HomePage() {
                   color: 'var(--dark-text)',
                 }}
               >
-                ⭐ Google · 5.0/5
+                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> Google · 5.0/5
               </span>
               <span
                 className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold shadow-sm border"
@@ -971,7 +920,7 @@ export default function HomePage() {
                   color: 'var(--dark-text)',
                 }}
               >
-                🏅 Qualiopi Certifié
+                <Award className="w-3.5 h-3.5" style={{ color: 'var(--brand)' }} /> Qualiopi Certifié
               </span>
               <span
                 className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold shadow-sm border"
@@ -1089,13 +1038,13 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             {[
-              { label: '100% satisfait',      icon: '😊', value: 100,  decimals: 0 },
-              { label: 'Note Google',          icon: '⭐', value: 5.0,  decimals: 1 },
-              { label: 'Avis vérifiés',        icon: '✓',  value: 26,   decimals: 0 },
-              { label: 'Semaines en moyenne',  icon: '⏱️', value: 3,    decimals: 0, unit: 'sem' },
+              { label: '100% satisfait',       Icon: TrendingUp, value: 100,  decimals: 0 },
+              { label: 'Note Google',          Icon: Star,       value: 5.0,  decimals: 1 },
+              { label: 'Avis vérifiés',        Icon: Check,      value: 26,   decimals: 0 },
+              { label: 'Semaines en moyenne',  Icon: Clock,      value: 3,    decimals: 0, unit: 'sem' },
             ].map((stat, i) => (
               <motion.div key={stat.label} variants={fadeUp} custom={i} className="text-center">
-                <div className="text-5xl mb-3">{stat.icon}</div>
+                <stat.Icon className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--brand)' }} />
                 <div className="font-serif font-black mb-2" style={{ fontSize: '3rem', color: 'var(--brand)' }}>
                   <AnimatedCounter target={stat.value} decimals={stat.decimals} />
                   {stat.unit && <span className="text-lg ml-1" style={{ color: 'var(--secondary-text)' }}>{stat.unit}</span>}
@@ -1138,13 +1087,13 @@ export default function HomePage() {
                 transition={{ delay: i * 0.12 }}
               >
                 <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center text-2xl border-2 z-10 shadow-sm transition-all"
+                  className="w-14 h-14 rounded-full flex items-center justify-center border-2 z-10 shadow-sm transition-all"
                   style={{
                     backgroundColor: step.done ? 'var(--brand)' : 'var(--card-bg)',
                     borderColor: step.done ? 'var(--brand)' : 'var(--border-color)',
                   }}
                 >
-                  {step.icon}
+                  <step.Icon className="w-6 h-6" style={{ color: step.done ? 'white' : 'var(--brand)' }} />
                 </div>
                 <span
                   className="text-xs font-semibold text-center"
@@ -1177,7 +1126,7 @@ export default function HomePage() {
         <div
           className="absolute inset-0 opacity-40"
           style={{
-            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(192,69,30,0.04) 12px, rgba(192,69,30,0.04) 24px)`,
+            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(45,106,79,0.04) 12px, rgba(45,106,79,0.04) 24px)`,
           }}
         />
         <motion.div
@@ -1188,7 +1137,7 @@ export default function HomePage() {
           transition={{ duration: 0.7 }}
         >
           <h2 className="font-serif italic font-black mb-4" style={{ color: 'var(--dark-text)', fontSize: 'clamp(1.8rem, 5vw, 2.8rem)' }}>
-            🎮 Teste tes connaissances code !
+            Testez vos connaissances du code
           </h2>
           <p className="text-lg mb-10" style={{ color: 'var(--secondary-text)' }}>
             Gratuit, 100% ludique, résultats instantanés.
@@ -1249,7 +1198,7 @@ export default function HomePage() {
                 style={{ color: 'var(--brand)' }}
               >
                 <Phone className="w-5 h-5" />
-                📞 01 82 83 31 26
+                01 82 83 31 26
               </a>
               <p className="text-white/60 text-xs mt-6 tracking-wide">
                 Inscription gratuite · Conseil sans engagement · Résultat garanti
