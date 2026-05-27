@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   Phone, Star, Check, ArrowRight, MapPin, ChevronRight,
   Quote, Leaf, Shield, Award, Zap, Clock, Users, TrendingUp,
@@ -13,19 +13,35 @@ import {
 function AnimatedCounter({ target, suffix = '', decimals = 0 }: { target: number; suffix?: string; decimals?: number }) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-50px' })
+  const started = useRef(false)
 
   useEffect(() => {
-    if (!inView) return
-    let start = 0
-    const step = target / 60
-    const timer = setInterval(() => {
-      start += step
-      if (start >= target) { setCount(target); clearInterval(timer) }
-      else setCount(parseFloat(start.toFixed(decimals)))
-    }, 20)
-    return () => clearInterval(timer)
-  }, [inView, target, decimals])
+    const el = ref.current
+    if (!el) return
+
+    function runAnimation() {
+      if (started.current) return
+      started.current = true
+      let current = 0
+      const increment = target / 60
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= target) {
+          setCount(target)
+          clearInterval(timer)
+        } else {
+          setCount(parseFloat(current.toFixed(decimals)))
+        }
+      }, 20)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { observer.disconnect(); runAnimation() } },
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [target, decimals])
 
   return <span ref={ref}>{decimals > 0 ? count.toFixed(decimals) : count}{suffix}</span>
 }
@@ -858,6 +874,105 @@ export default function HomePage() {
                 </span>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          ÉQUIPE
+      ══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="font-mono text-xs font-semibold tracking-widest uppercase" style={{ color: 'var(--brand)' }}>
+              Notre équipe
+            </span>
+            <h2
+              className="font-serif italic font-black mt-2"
+              style={{ color: 'var(--dark-text)', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}
+            >
+              Des humains derrière le permis
+            </h2>
+            <p className="mt-3 max-w-xl mx-auto" style={{ color: 'var(--secondary-text)' }}>
+              Une équipe à taille humaine où chacun vous connaît par votre prénom.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {[
+              {
+                initial: 'S',
+                name: 'Seyba Doucouré',
+                role: 'Directeur & Fondateur',
+                desc: 'Il veille à ce que chaque élève soit prêt — sans heure de trop ni pression commerciale.',
+                color: '#2d6a4f',
+                badges: ['Qualiopi', 'Label qualité État'],
+              },
+              {
+                initial: 'O',
+                name: 'Oumy',
+                role: 'Accueil & Inscriptions',
+                desc: 'Première voix que vous entendez, premier sourire que vous voyez. Elle monte les dossiers CPF et permis à 1€.',
+                color: '#6366f1',
+                badges: ['CPF', 'Permis 1€/jour'],
+              },
+              {
+                initial: 'I',
+                name: 'Ibtissem',
+                role: 'Monitrice de conduite',
+                desc: 'Pédagogue et patiente, elle forme avec l\'approche éco-conduite et s\'adapte à chaque profil d\'élève.',
+                color: '#0891b2',
+                badges: ['BVA', 'Éco-conduite'],
+              },
+            ].map((member, i) => (
+              <motion.div
+                key={member.name}
+                variants={fadeUp}
+                custom={i}
+                className="rounded-2xl border p-7 flex flex-col hover:-translate-y-1 hover:shadow-xl transition-all"
+                style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}
+              >
+                {/* Avatar */}
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-serif font-black text-2xl mb-5 shadow-md"
+                  style={{ backgroundColor: member.color, fontStyle: 'italic' }}
+                >
+                  {member.initial}
+                </div>
+
+                {/* Identity */}
+                <h3 className="font-bold text-lg mb-0.5" style={{ color: 'var(--dark-text)' }}>{member.name}</h3>
+                <p className="text-sm font-semibold mb-3" style={{ color: member.color }}>{member.role}</p>
+
+                {/* Description */}
+                <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--secondary-text)' }}>{member.desc}</p>
+
+                {/* Badges */}
+                <div className="flex flex-wrap gap-1.5 mt-4 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+                  {member.badges.map(b => (
+                    <span
+                      key={b}
+                      className="text-[10px] font-bold px-2.5 py-1 rounded-full"
+                      style={{ backgroundColor: `${member.color}15`, color: member.color }}
+                    >
+                      {b}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>

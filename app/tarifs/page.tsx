@@ -88,6 +88,31 @@ export default function TarifsPage() {
           ))}
         </div>
 
+        {/* Heures supplémentaires */}
+        <div className="max-w-6xl mx-auto mb-6">
+          <div className="bg-white rounded-2xl border border-[#dde5dc] p-6 flex flex-col sm:flex-row items-center gap-6 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#2d6a4f]/10 flex items-center justify-center flex-shrink-0">
+              <Car className="w-6 h-6 text-[#2d6a4f]" />
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="font-bold text-[#1a2e22] text-lg mb-1">Heures supplémentaires</h3>
+              <p className="text-sm text-[#4a5a52]">Si des heures en plus du forfait sont nécessaires, voici le tarif à l&apos;heure :</p>
+            </div>
+            <div className="flex gap-4 flex-shrink-0">
+              <div className="text-center bg-[#f7f9f5] rounded-xl px-5 py-3 border border-[#dde5dc]">
+                <div className="font-serif font-black text-2xl text-[#2d6a4f]">60€</div>
+                <div className="text-xs font-semibold text-[#4a5a52] mt-0.5">/ heure BVM</div>
+                <div className="text-[10px] text-[#8a9690]">Boîte manuelle</div>
+              </div>
+              <div className="text-center bg-[#f7f9f5] rounded-xl px-5 py-3 border border-[#dde5dc]">
+                <div className="font-serif font-black text-2xl text-[#2d6a4f]">65€</div>
+                <div className="text-xs font-semibold text-[#4a5a52] mt-0.5">/ heure BVA</div>
+                <div className="text-[10px] text-[#8a9690]">Boîte automatique</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Permis 1€/jour banner */}
         <div className="max-w-6xl mx-auto bg-gradient-to-r from-[#16a34a]/10 to-[#16a34a]/5 border border-[#16a34a]/20 rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6">
           <div className="w-14 h-14 rounded-xl bg-[#16a34a]/10 flex items-center justify-center flex-shrink-0">
