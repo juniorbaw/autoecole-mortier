@@ -1,27 +1,47 @@
 import type { Metadata } from 'next'
-import { Check, Phone, AlertTriangle, BookOpen, Car, Zap, Rocket, CreditCard, Banknote, Landmark, FileText, GraduationCap, Euro, Repeat } from 'lucide-react'
+import { Check, Phone, AlertTriangle, BookOpen, Car, Zap, Rocket, CreditCard, Banknote, Landmark, FileText, GraduationCap, Euro, Info } from 'lucide-react'
 
 export const metadata: Metadata = { title: 'Tarifs' }
 
+// ── Forfaits principaux ───────────────────────────────────────────────────────
 const PLANS = [
   {
-    Icon: BookOpen, title: 'Code Seul', price: '299€', sub: 'Accès illimité en ligne', featured: false,
-    features: ['Code en ligne illimité', 'Cours collectifs inclus', 'Suivi personnalisé', 'Inscription examen incluse'],
+    Icon: BookOpen, title: 'Code Seul', price: '299€', sub: 'Cours en salle', featured: false,
+    features: ['Code en salle', 'Cours collectifs inclus', 'Suivi personnalisé', 'Inscription examen incluse'],
   },
   {
-    Icon: Car, title: 'Permis B Manuel', price: '1 099€', sub: 'Forfait 20h de conduite', featured: false,
-    features: ['Code de la route inclus', '20h de conduite minimum', 'Accompagnement examen', 'Finançable CPF', 'Compatible permis 1€/jour', 'Moniteurs certifiés'],
+    Icon: Car, title: 'Permis B Manuel', price: '1 100€', sub: 'Forfait 20h de conduite', featured: false,
+    features: ['Numéro NEPH inclus', 'Code en salle inclus', '20h de conduite', 'Finançable CPF', 'Compatible permis 1€/jour', 'Moniteurs certifiés'],
   },
   {
-    Icon: Zap, title: 'Permis B Automatique', price: '899€', sub: 'Notre spécialité — forfait 13h', featured: true,
-    features: ['Code de la route inclus', '13h de conduite minimum', 'Plus accessible & rapide', 'Idéal mobilité urbaine', 'Finançable CPF', 'Compatible permis 1€/jour'],
+    Icon: Zap, title: 'Permis B Automatique', price: '950€', sub: 'Notre spécialité — forfait 13h', featured: true,
+    features: ['Numéro NEPH inclus', 'Code en salle inclus', '13h de conduite', 'Plus accessible & rapide', 'Finançable CPF', 'Compatible permis 1€/jour'],
   },
   {
     Icon: Rocket, title: 'Formule Accélérée', price: '1 399€', sub: 'Code + conduite en 2-4 semaines', featured: false,
-    features: ['Stage code 3 jours', 'Conduite quotidienne intensive', 'Date examen prioritaire', 'Finançable CPF'],
+    features: ['Numéro NEPH inclus', 'Stage code 3 jours en salle', 'Conduite quotidienne intensive', 'Date examen prioritaire', 'Finançable CPF'],
   },
 ]
 
+// ── Grilles tarifaires complètes ─────────────────────────────────────────────
+const BVM_TABLE = [
+  { heures: 20, normal: 1100, accelere: 1300 },
+  { heures: 25, normal: 1400, accelere: 1600 },
+  { heures: 30, normal: 1700, accelere: 1900 },
+  { heures: 35, normal: 2000, accelere: 2200 },
+  { heures: 40, normal: 2300, accelere: 2500 },
+]
+
+const BVA_TABLE = [
+  { heures: 13, normal: 950,  accelere: null },
+  { heures: 20, normal: 1350, accelere: 1500 },
+  { heures: 25, normal: 1675, accelere: 1825 },
+  { heures: 30, normal: 2050, accelere: 2200 },
+  { heures: 35, normal: 2375, accelere: 2525 },
+  { heures: 40, normal: 2650, accelere: 2800 },
+]
+
+// ── Modes de paiement ─────────────────────────────────────────────────────────
 const PAIEMENTS = [
   { Icon: CreditCard,    label: 'Carte bancaire' },
   { Icon: Banknote,      label: 'Espèces' },
@@ -29,31 +49,48 @@ const PAIEMENTS = [
   { Icon: FileText,      label: 'Chèque' },
   { Icon: GraduationCap, label: 'CPF' },
   { Icon: Euro,          label: 'Permis 1€/jour' },
-  { Icon: Repeat,        label: 'Paiement 3x' },
 ]
 
+// ── Aides ─────────────────────────────────────────────────────────────────────
 const AIDES = [
   { label: 'Permis à 1€/jour (15-25 ans)', value: 'Prêt taux 0', color: '#16a34a' },
   { label: 'Aide Région IDF — app LABAZ', value: "Jusqu'à 1 300€", color: '#0891b2' },
-  { label: 'CPF (demandeurs d\'emploi)', value: "Jusqu'à 900€", color: '#6366f1' },
+  { label: "CPF (demandeurs d'emploi)", value: "Jusqu'à 900€", color: '#6366f1' },
   { label: 'Mission locale / FAJ (18-25 ans)', value: 'Variable', color: '#f59e0b' },
   { label: 'Contrat Engagement Jeune (CEJ)', value: 'Cas par cas', color: '#ec4899' },
 ]
+
+function fmt(n: number) {
+  return n.toLocaleString('fr-FR') + '€'
+}
 
 export default function TarifsPage() {
   return (
     <div className="min-h-screen bg-[#f7f9f5]">
 
-      {/* Header */}
+      {/* ── Header ─────────────────────────────────────────────────────────── */}
       <section className="py-20 px-4 bg-[#eef2ec]">
         <div className="max-w-7xl mx-auto text-center">
           <span className="font-mono text-xs text-[#2d6a4f] font-semibold tracking-widest uppercase">Tarifs</span>
           <h1 className="font-serif text-4xl sm:text-5xl font-black text-[#1a2e22] mt-2 mb-4">Des prix clairs, sans surprises</h1>
-          <p className="text-[#4a5a52] text-lg max-w-2xl mx-auto">Les tarifs les plus compétitifs du 20ème avec un service 5 étoiles.</p>
+          <p className="text-[#4a5a52] text-lg max-w-2xl mx-auto">
+            Les tarifs les plus compétitifs du 20ème avec un service 5 étoiles.
+          </p>
+          {/* Ce que comprend chaque forfait */}
+          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 bg-white border border-[#dde5dc] rounded-2xl px-8 py-4 shadow-sm">
+            <span className="text-xs font-bold text-[#2d6a4f] uppercase tracking-widest w-full sm:w-auto">Chaque forfait comprend :</span>
+            {['Numéro NEPH', 'Code en salle', 'Conduite'].map((item, i) => (
+              <span key={item} className="flex items-center gap-1.5 text-sm text-[#1a2e22] font-medium">
+                {i > 0 && <span className="text-[#dde5dc] hidden sm:inline">·</span>}
+                <Check className="w-3.5 h-3.5 text-[#2d6a4f]" />
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Plans */}
+      {/* ── Forfaits principaux ─────────────────────────────────────────────── */}
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           {PLANS.map((plan) => (
@@ -96,7 +133,7 @@ export default function TarifsPage() {
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h3 className="font-bold text-[#1a2e22] text-lg mb-1">Heures supplémentaires</h3>
-              <p className="text-sm text-[#4a5a52]">Si des heures en plus du forfait sont nécessaires, voici le tarif à l&apos;heure :</p>
+              <p className="text-sm text-[#4a5a52]">Au-delà du forfait, chaque heure supplémentaire est facturée :</p>
             </div>
             <div className="flex gap-4 flex-shrink-0">
               <div className="text-center bg-[#f7f9f5] rounded-xl px-5 py-3 border border-[#dde5dc]">
@@ -128,7 +165,129 @@ export default function TarifsPage() {
         </div>
       </section>
 
-      {/* Offres Spéciales */}
+      {/* ── Grille tarifaire complète ───────────────────────────────────────── */}
+      <section className="py-16 px-4 bg-[#eef2ec]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="font-mono text-xs text-[#2d6a4f] font-semibold tracking-widest uppercase">Grille tarifaire</span>
+            <h2 className="font-serif text-3xl font-black text-[#1a2e22] mt-2">Forfaits par nombre d&apos;heures</h2>
+            <p className="text-[#4a5a52] mt-2">Choisissez le volume qui correspond à votre niveau</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            {/* BVM */}
+            <div className="bg-white rounded-2xl border border-[#dde5dc] overflow-hidden shadow-sm">
+              <div className="bg-[#eef2ec] px-6 py-4 border-b border-[#dde5dc] flex items-center justify-between">
+                <div>
+                  <h3 className="font-bold text-[#1a2e22] text-lg">Boîte Manuelle (BVM)</h3>
+                  <p className="text-xs text-[#8a9690] mt-0.5">1h supp = 60€ · Perfectionnement 10h = 600€</p>
+                </div>
+                <Car className="w-6 h-6 text-[#2d6a4f]" />
+              </div>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-[#dde5dc] bg-[#f7f9f5]">
+                    <th className="text-left px-5 py-3 text-[#4a5a52] font-semibold">Heures</th>
+                    <th className="px-5 py-3 text-[#4a5a52] font-semibold text-right">Normal</th>
+                    <th className="px-5 py-3 text-[#2d6a4f] font-semibold text-right">Accéléré</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {BVM_TABLE.map((row, i) => (
+                    <tr key={row.heures} className={`border-b border-[#dde5dc] ${i % 2 === 0 ? '' : 'bg-[#f7f9f5]'} ${row.heures === 20 ? 'ring-1 ring-inset ring-[#2d6a4f]/20' : ''}`}>
+                      <td className="px-5 py-3.5 font-medium text-[#1a2e22]">
+                        {row.heures}h
+                        {row.heures === 20 && <span className="ml-2 text-[10px] font-bold bg-[#2d6a4f]/10 text-[#2d6a4f] px-2 py-0.5 rounded-full">Forfait de base</span>}
+                      </td>
+                      <td className="px-5 py-3.5 text-right font-bold text-[#1a2e22]">{fmt(row.normal)}</td>
+                      <td className="px-5 py-3.5 text-right font-bold text-[#2d6a4f]">{fmt(row.accelere)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* BVA */}
+            <div className="bg-white rounded-2xl border border-[#2d6a4f] overflow-hidden shadow-xl">
+              <div className="bg-[#2d6a4f] px-6 py-4 border-b border-[#2d6a4f] flex items-center justify-between">
+                <div>
+                  <h3 className="font-bold text-white text-lg">Boîte Automatique (BVA)</h3>
+                  <p className="text-xs text-white/70 mt-0.5">1h supp = 65€ · Perfectionnement 10h = 650€</p>
+                </div>
+                <div className="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">★ Spécialité</div>
+              </div>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-[#dde5dc] bg-[#f7f9f5]">
+                    <th className="text-left px-5 py-3 text-[#4a5a52] font-semibold">Heures</th>
+                    <th className="px-5 py-3 text-[#4a5a52] font-semibold text-right">Normal</th>
+                    <th className="px-5 py-3 text-[#2d6a4f] font-semibold text-right">Accéléré</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {BVA_TABLE.map((row, i) => (
+                    <tr key={row.heures} className={`border-b border-[#dde5dc] ${i % 2 === 0 ? '' : 'bg-[#f7f9f5]'} ${row.heures === 13 ? 'ring-1 ring-inset ring-[#2d6a4f]/20' : ''}`}>
+                      <td className="px-5 py-3.5 font-medium text-[#1a2e22]">
+                        {row.heures}h
+                        {row.heures === 13 && <span className="ml-2 text-[10px] font-bold bg-[#2d6a4f]/10 text-[#2d6a4f] px-2 py-0.5 rounded-full">Forfait de base</span>}
+                      </td>
+                      <td className="px-5 py-3.5 text-right font-bold text-[#1a2e22]">{fmt(row.normal)}</td>
+                      <td className="px-5 py-3.5 text-right font-bold text-[#2d6a4f]">
+                        {row.accelere ? fmt(row.accelere) : <span className="text-[#8a9690] font-normal text-xs">—</span>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Note accéléré */}
+          <div className="mt-4 flex items-start gap-3 bg-white border border-[#dde5dc] rounded-xl px-5 py-4 max-w-2xl mx-auto">
+            <Info className="w-4 h-4 text-[#2d6a4f] flex-shrink-0 mt-0.5" />
+            <p className="text-xs text-[#4a5a52]">
+              <strong className="text-[#1a2e22]">Formule accélérée</strong> : code en salle intensif 3 jours + conduite quotidienne. Délai obtention permis réduit à 2-4 semaines.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Perfectionnement ────────────────────────────────────────────────── */}
+      <section className="py-14 px-4 bg-[#f7f9f5]">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="font-mono text-xs text-[#2d6a4f] font-semibold tracking-widest uppercase">Post-forfait</span>
+            <h2 className="font-serif text-2xl font-black text-[#1a2e22] mt-2">Perfectionnement</h2>
+            <p className="text-[#4a5a52] mt-1 text-sm">Pour les élèves qui souhaitent consolider leur conduite après le forfait</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="bg-white rounded-2xl border border-[#dde5dc] p-6 flex items-center gap-5">
+              <div className="w-14 h-14 rounded-xl bg-[#2d6a4f]/10 flex items-center justify-center flex-shrink-0">
+                <Car className="w-7 h-7 text-[#2d6a4f]" />
+              </div>
+              <div>
+                <p className="font-bold text-[#1a2e22] mb-0.5">Perfectionnement BVM</p>
+                <p className="text-sm text-[#4a5a52]">10 heures de conduite boîte manuelle</p>
+                <p className="font-serif font-black text-2xl text-[#2d6a4f] mt-1">600€</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl border border-[#2d6a4f] p-6 flex items-center gap-5 shadow-md">
+              <div className="w-14 h-14 rounded-xl bg-[#2d6a4f]/10 flex items-center justify-center flex-shrink-0">
+                <Zap className="w-7 h-7 text-[#2d6a4f]" />
+              </div>
+              <div>
+                <p className="font-bold text-[#1a2e22] mb-0.5">Perfectionnement BVA</p>
+                <p className="text-sm text-[#4a5a52]">10 heures de conduite boîte automatique</p>
+                <p className="font-serif font-black text-2xl text-[#2d6a4f] mt-1">650€</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Offres Spéciales ────────────────────────────────────────────────── */}
       <section className="py-16 px-4 bg-[#eef2ec]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -151,20 +310,20 @@ export default function TarifsPage() {
                     <span className="text-sm font-medium text-[#4a5a52]">Permis B Manuel 20h</span>
                     <div className="text-right">
                       <span className="font-serif font-black text-[#2d6a4f] text-xl">935€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">1 099€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">1 100€</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f7f9f5] rounded-xl">
                     <span className="text-sm font-medium text-[#4a5a52]">Permis B Auto 13h</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#2d6a4f] text-xl">765€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">899€</span>
+                      <span className="font-serif font-black text-[#2d6a4f] text-xl">808€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">950€</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f7f9f5] rounded-xl">
                     <span className="text-sm font-medium text-[#4a5a52]">Code Seul</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#2d6a4f] text-xl">255€</span>
+                      <span className="font-serif font-black text-[#2d6a4f] text-xl">254€</span>
                       <span className="text-xs text-[#8a9690] ml-1 line-through">299€</span>
                     </div>
                   </div>
@@ -172,7 +331,7 @@ export default function TarifsPage() {
                 <div className="bg-[#16a34a]/10 border border-[#16a34a]/20 rounded-xl p-3 mb-4 text-center">
                   <span className="text-sm font-bold text-[#16a34a]">15-25 ans ? Permis à 1€/jour — soit ~26€/mois !</span>
                 </div>
-                <p className="text-xs text-[#8a9690]">Non cumulable avec l&apos;offre QPV. Heures supp : 60€/h BVM — 65€/h BVA</p>
+                <p className="text-xs text-[#8a9690]">Non cumulable avec l&apos;offre QPV.</p>
               </div>
             </div>
 
@@ -189,33 +348,32 @@ export default function TarifsPage() {
                     <span className="text-sm font-medium text-[#4a5a52]">Permis B Manuel 20h</span>
                     <div className="text-right">
                       <span className="font-serif font-black text-[#3b82f6] text-xl">935€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">1 099€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">1 100€</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f0f9ff] rounded-xl">
                     <span className="text-sm font-medium text-[#4a5a52]">Permis B Auto 13h</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#3b82f6] text-xl">765€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">899€</span>
+                      <span className="font-serif font-black text-[#3b82f6] text-xl">808€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">950€</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f0f9ff] rounded-xl">
                     <span className="text-sm font-medium text-[#4a5a52]">Code Seul</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#3b82f6] text-xl">255€</span>
+                      <span className="font-serif font-black text-[#3b82f6] text-xl">254€</span>
                       <span className="text-xs text-[#8a9690] ml-1 line-through">299€</span>
                     </div>
                   </div>
                 </div>
-                <p className="text-xs text-[#8a9690] mb-1">Justificatif de domicile en QPV du 20e requis</p>
-                <p className="text-xs text-[#8a9690]">Non cumulable avec l&apos;offre étudiante. Heures supp : 60€/h BVM — 65€/h BVA</p>
+                <p className="text-xs text-[#8a9690]">Justificatif de domicile en QPV du 20e requis. Non cumulable avec l&apos;offre étudiante.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Aides disponibles */}
+      {/* ── Aides disponibles ────────────────────────────────────────────────── */}
       <section className="py-16 px-4 bg-[#f7f9f5]">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
@@ -248,7 +406,7 @@ export default function TarifsPage() {
         </div>
       </section>
 
-      {/* Parrainage */}
+      {/* ── Parrainage ──────────────────────────────────────────────────────── */}
       <section className="py-16 px-4 bg-[#0a1410]">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
@@ -258,7 +416,6 @@ export default function TarifsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            {/* Ce que tu reçois */}
             <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
               <p className="text-xs font-bold text-[#2d6a4f] uppercase tracking-widest mb-3">CE QUE TU REÇOIS</p>
               <div className="font-serif text-3xl font-black text-white mb-1">1h de conduite offerte</div>
@@ -267,8 +424,6 @@ export default function TarifsPage() {
                 <span className="text-[#2d6a4f] font-bold text-sm">Valeur totale : jusqu&apos;à 110€ d&apos;avantage</span>
               </div>
             </div>
-
-            {/* Ce que ton ami reçoit */}
             <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
               <p className="text-xs font-bold text-[#2d6a4f] uppercase tracking-widest mb-3">CE QUE TON AMI REÇOIT</p>
               <div className="font-serif text-3xl font-black text-white mb-1">-50€ sur son inscription</div>
@@ -276,44 +431,40 @@ export default function TarifsPage() {
             </div>
           </div>
 
-          {/* Super Parrain — Paliers */}
           <div className="bg-white/5 border border-[#2d6a4f]/30 rounded-2xl p-6">
             <p className="text-xs font-bold text-[#2d6a4f] uppercase tracking-widest mb-5 text-center">SUPER PARRAIN — PALIERS</p>
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-white/80 font-medium">3 amis inscrits</span>
-                <div className="text-right">
-                  <span className="font-bold text-[#2d6a4f]">+1h conduite gratuite</span>
-                  <span className="text-white/40 text-xs ml-2">(60€ de valeur)</span>
+              {[
+                { seuil: '3 amis inscrits',  reward: '+1h conduite gratuite',          valeur: '(60€ de valeur)' },
+                { seuil: '5 amis inscrits',  reward: '+2h conduite gratuites',          valeur: '(120€ de valeur)' },
+                { seuil: '10 amis inscrits', reward: 'Conversion BVA→BVM OFFERTE',      valeur: '(345€ de valeur)' },
+              ].map((p, i) => (
+                <div key={p.seuil}>
+                  {i > 0 && <div className="h-px bg-white/10 mb-4" />}
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/80 font-medium">{p.seuil}</span>
+                    <div className="text-right">
+                      <span className="font-bold text-[#2d6a4f]">{p.reward}</span>
+                      <span className="text-white/40 text-xs ml-2">{p.valeur}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="h-px bg-white/10" />
-              <div className="flex items-center justify-between">
-                <span className="text-white/80 font-medium">5 amis inscrits</span>
-                <div className="text-right">
-                  <span className="font-bold text-[#2d6a4f]">+2h conduite gratuites</span>
-                  <span className="text-white/40 text-xs ml-2">(120€ de valeur)</span>
-                </div>
-              </div>
-              <div className="h-px bg-white/10" />
-              <div className="flex items-center justify-between">
-                <span className="text-white/80 font-medium">10 amis inscrits</span>
-                <div className="text-right">
-                  <span className="font-bold text-[#2d6a4f]">Conversion BVA→BVM OFFERTE</span>
-                  <span className="text-white/40 text-xs ml-2">(345€ de valeur)</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          <p className="text-center text-white/40 text-sm mt-6">Pour obtenir ton code parrain, demande à Oumy — <a href="tel:0182833126" className="text-[#2d6a4f] hover:underline">01 82 83 31 26</a></p>
+          <p className="text-center text-white/40 text-sm mt-6">
+            Pour obtenir ton code parrain, demande à Oumy — <a href="tel:0182833126" className="text-[#2d6a4f] hover:underline">01 82 83 31 26</a>
+          </p>
         </div>
       </section>
 
-      {/* Modes de paiement */}
+      {/* ── Modalité de paiement ─────────────────────────────────────────────── */}
       <section className="py-12 px-4 bg-[#eef2ec]">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-serif text-2xl font-black text-[#1a2e22] mb-8">Modes de paiement acceptés</h2>
+          <span className="font-mono text-xs text-[#2d6a4f] font-semibold tracking-widest uppercase">Modalités</span>
+          <h2 className="font-serif text-2xl font-black text-[#1a2e22] mt-2 mb-2">Modes de paiement acceptés</h2>
+          <p className="text-sm text-[#4a5a52] mb-8">Règlement à l&apos;inscription. Financement CPF et Permis 1€/jour possibles.</p>
           <div className="flex flex-wrap justify-center gap-3">
             {PAIEMENTS.map(({ Icon, label }) => (
               <div key={label} className="bg-white border border-[#dde5dc] rounded-xl px-4 py-2.5 text-sm font-medium text-[#1a2e22] shadow-sm flex items-center gap-2">
