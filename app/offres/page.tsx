@@ -229,7 +229,7 @@ export default function OffresPage() {
                   </div>
                   <div className="flex justify-between">
                     <span>10 filleuls →</span>
-                    <span className="font-medium text-[#2d6a4f]">Conversion BVA offerte (349€)</span>
+                    <span className="font-medium text-[#2d6a4f]">Passerelle BVA offerte (349€)</span>
                   </div>
                 </div>
               </div>

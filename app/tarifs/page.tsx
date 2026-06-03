@@ -437,7 +437,7 @@ export default function TarifsPage() {
               {[
                 { seuil: '3 amis inscrits',  reward: '+1h conduite gratuite',          valeur: '(60€ de valeur)' },
                 { seuil: '5 amis inscrits',  reward: '+2h conduite gratuites',          valeur: '(120€ de valeur)' },
-                { seuil: '10 amis inscrits', reward: 'Conversion BVA→BVM OFFERTE',      valeur: '(345€ de valeur)' },
+                { seuil: '10 amis inscrits', reward: 'Passerelle BVA→BVM OFFERTE',      valeur: '(345€ de valeur)' },
               ].map((p, i) => (
                 <div key={p.seuil}>
                   {i > 0 && <div className="h-px bg-white/10 mb-4" />}
