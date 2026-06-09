@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Phone, Check, Car, Zap, Rocket, Users, Euro, Eye, Repeat, Smartphone, RefreshCcw } from 'lucide-react'
+import TiltCard from '@/components/TiltCard'
 
 export const metadata: Metadata = { title: 'Formations' }
 
@@ -35,9 +36,9 @@ export default function FormationsPage() {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {FORMATIONS.map((f, i) => (
-            <div
+            <TiltCard
               key={f.title}
-              className="bg-white rounded-2xl border border-[#dde5dc] overflow-hidden card-hover flex flex-col animate-fade-up"
+              className="bg-white rounded-2xl border border-[#dde5dc] overflow-hidden flex flex-col animate-fade-up"
               style={{ animationDelay: `${i * 0.07}s` }}
             >
               <div className="p-6 flex-1">
@@ -67,7 +68,7 @@ export default function FormationsPage() {
                   S&apos;inscrire
                 </a>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </section>

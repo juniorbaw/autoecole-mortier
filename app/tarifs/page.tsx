@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Check, Phone, AlertTriangle, BookOpen, Car, Zap, Rocket, CreditCard, Banknote, Landmark, FileText, GraduationCap, Euro, Info, Monitor } from 'lucide-react'
+import TiltCard from '@/components/TiltCard'
 
 export const metadata: Metadata = { title: 'Tarifs' }
 
@@ -94,9 +95,9 @@ export default function TarifsPage() {
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           {PLANS.map((plan, i) => (
-            <div
+            <TiltCard
               key={plan.title}
-              className={`relative bg-white rounded-2xl border flex flex-col overflow-hidden card-hover animate-fade-up ${plan.featured ? 'border-[#2d6a4f] shadow-xl' : 'border-[#dde5dc]'}`}
+              className={`relative bg-white rounded-2xl border flex flex-col overflow-hidden animate-fade-up ${plan.featured ? 'border-[#2d6a4f] shadow-xl' : 'border-[#dde5dc]'}`}
               style={{ animationDelay: `${i * 0.1}s` }}
             >
               {plan.featured && (
@@ -125,7 +126,7 @@ export default function TarifsPage() {
                   S&apos;inscrire
                 </a>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
 

@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import WaveCanvas from '@/components/WaveCanvas'
+import ParticleCar from '@/components/ParticleCar'
 import {
   Phone, Star, Check, ArrowRight, MapPin, ChevronRight,
   Quote, Leaf, Shield, Award, Zap, Clock, Users, TrendingUp,
@@ -435,6 +437,8 @@ export default function HomePage() {
           HERO
       ══════════════════════════════════════════════════════════════════════ */}
       <section className="min-h-screen flex items-center py-24 px-6 relative overflow-hidden">
+        {/* Vagues animées */}
+        <WaveCanvas />
         {/* Floating orbs */}
         <div className="absolute top-24 -left-40 w-96 h-96 rounded-full opacity-40 float-circle"
           style={{ background: 'radial-gradient(circle, rgba(45,106,79,0.12) 0%, transparent 70%)' }} />
@@ -1483,6 +1487,37 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          PARTICULE VOITURE
+      ══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-16 px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            className="text-center mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="font-mono text-xs font-semibold tracking-widest uppercase" style={{ color: 'var(--brand)' }}>
+              Notre véhicule BVA
+            </span>
+            <h2 className="font-serif italic font-black mt-2" style={{ color: 'var(--dark-text)', fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)' }}>
+              Toyota Yaris — en particules
+            </h2>
+          </motion.div>
+          <motion.div
+            className="rounded-3xl border overflow-hidden shadow-sm"
+            style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <ParticleCar />
           </motion.div>
         </div>
       </section>

@@ -1,8 +1,65 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, RotateCcw, Trophy, Star, Check, X, ArrowRight, Zap, TrafficCone, ClipboardList, Brain, BookOpen, Car, ThumbsUp, Award } from 'lucide-react'
+
+// ── Confetti ─────────────────────────────────────────────────────────────────
+function ConfettiCanvas({ active }: { active: boolean }) {
+  const ref = useRef<HTMLCanvasElement>(null)
+  useEffect(() => {
+    if (!active) return
+    const canvas = ref.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    const COLORS = ['#2d6a4f', '#52b788', '#16a34a', '#74c69d', '#fef08a', '#ffffff', '#f59e0b', '#95d5b2']
+    const particles = Array.from({ length: 180 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * 80,
+      vx: (Math.random() - 0.5) * 5,
+      vy: Math.random() * 4 + 2,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      rot: Math.random() * 360,
+      vr: (Math.random() - 0.5) * 9,
+      w: Math.random() * 13 + 5,
+      h: Math.random() * 6 + 2,
+      alpha: 1,
+    }))
+    let animId: number
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      let alive = false
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.09
+        p.rot += p.vr; p.alpha -= 0.005
+        if (p.alpha > 0) {
+          alive = true
+          ctx.save(); ctx.globalAlpha = p.alpha
+          ctx.translate(p.x, p.y); ctx.rotate((p.rot * Math.PI) / 180)
+          ctx.fillStyle = p.color; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h)
+          ctx.restore()
+        }
+      })
+      if (alive) animId = requestAnimationFrame(draw)
+    }
+    draw()
+    return () => cancelAnimationFrame(animId)
+  }, [active])
+  if (!active) return null
+  return <canvas ref={ref} className="fixed inset-0 pointer-events-none" style={{ zIndex: 999 }} />
+}
+
+// ── Niveaux RPG ───────────────────────────────────────────────────────────────
+function getLevelConfig(score: number) {
+  if (score >= 24) return { name: 'As du volant',  color: '#f59e0b', stars: 5, Icon: Trophy  }
+  if (score >= 18) return { name: 'Expert',         color: '#2d6a4f', stars: 4, Icon: Award   }
+  if (score >= 12) return { name: 'Confirmé',       color: '#0891b2', stars: 3, Icon: Star    }
+  if (score >= 6)  return { name: 'Apprenti',       color: '#6366f1', stars: 2, Icon: Zap     }
+  return                  { name: 'Débutant',       color: '#8a9690', stars: 1, Icon: BookOpen }
+}
 
 const QUESTIONS = [
   // Signalisation (10)
@@ -55,6 +112,8 @@ export default function QuizPage() {
   const [scores, setScores] = useState<Record<string, number>>({ Signalisation: 0, Règles: 0, Comportement: 0 })
   const [done, setDone] = useState(false)
   const [direction, setDirection] = useState(1)
+  const [showXpFlash, setShowXpFlash] = useState(false)
+  const [confettiActive, setConfettiActive] = useState(false)
 
   function handleAnswer(idx: number) {
     if (selected !== null) return
@@ -64,10 +123,17 @@ export default function QuizPage() {
     if (isCorrect) {
       const cat = QUESTIONS[current].category
       setScores(s => ({ ...s, [cat]: s[cat] + 1 }))
+      setShowXpFlash(true)
+      setTimeout(() => setShowXpFlash(false), 1100)
     }
+    const projected = totalScore + (isCorrect ? 1 : 0)
     setTimeout(() => {
       if (current + 1 >= QUESTIONS.length) {
         setDone(true)
+        if (projected / QUESTIONS.length >= 0.8) {
+          setConfettiActive(true)
+          setTimeout(() => setConfettiActive(false), 5500)
+        }
       } else {
         setDirection(1)
         setCurrent(c => c + 1)
@@ -84,11 +150,15 @@ export default function QuizPage() {
     setCorrect(null)
     setScores({ Signalisation: 0, Règles: 0, Comportement: 0 })
     setDone(false)
+    setShowXpFlash(false)
+    setConfettiActive(false)
   }
 
   const totalScore = Object.values(scores).reduce((a, b) => a + b, 0)
   const percentage = Math.round((totalScore / QUESTIONS.length) * 100)
   const progressWidth = ((current + (selected !== null ? 1 : 0)) / QUESTIONS.length) * 100
+  const xp = totalScore * 10
+  const currentLevel = getLevelConfig(totalScore)
 
   function getResultConfig() {
     if (percentage >= 80) return { label: 'Excellent, vous êtes prêt',     Icon: Trophy,   color: '#16a34a', grade: 'Expert' }
@@ -102,6 +172,7 @@ export default function QuizPage() {
 
   return (
     <div className="min-h-screen py-16 px-4" style={{ backgroundColor: 'var(--bg-main)' }}>
+      <ConfettiCanvas active={confettiActive} />
       <div className="max-w-2xl mx-auto">
 
         {/* ── Header ── */}
@@ -174,18 +245,46 @@ export default function QuizPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.65 }}
                 >
-                  <p className="text-2xl font-bold mb-2" style={{ color: 'var(--dark-text)' }}>
+                  <p className="text-2xl font-bold mb-3" style={{ color: 'var(--dark-text)' }}>
                     {resultConfig.label}
                   </p>
-                  <span
-                    className="inline-block text-xs font-bold px-4 py-1.5 rounded-full"
-                    style={{
-                      backgroundColor: `${resultConfig.color}15`,
-                      color: resultConfig.color,
-                    }}
-                  >
-                    Niveau : {resultConfig.grade}
-                  </span>
+                  {/* Étoiles de niveau */}
+                  <div className="flex justify-center gap-1 mb-3">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ scale: 0, rotate: -30 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ delay: 0.7 + i * 0.08, type: 'spring', stiffness: 250 }}
+                      >
+                        <Star
+                          className="w-6 h-6"
+                          style={{
+                            color: i < getLevelConfig(totalScore).stars ? '#f59e0b' : 'var(--border-color)',
+                            fill: i < getLevelConfig(totalScore).stars ? '#f59e0b' : 'transparent',
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                  {(() => {
+                    const lvl = getLevelConfig(totalScore)
+                    const LvlIcon = lvl.Icon
+                    return (
+                      <span
+                        className="inline-flex items-center gap-1.5 text-sm font-bold px-4 py-1.5 rounded-full"
+                        style={{ backgroundColor: `${lvl.color}15`, color: lvl.color }}
+                      >
+                        <LvlIcon className="w-4 h-4" />
+                        Niveau : {lvl.name}
+                      </span>
+                    )
+                  })()}
+                  {xp > 0 && (
+                    <p className="text-sm mt-2" style={{ color: 'var(--secondary-text)' }}>
+                      {xp} XP gagnés sur 300
+                    </p>
+                  )}
                 </motion.div>
               </div>
 
@@ -286,20 +385,68 @@ export default function QuizPage() {
                 style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}
               >
                 {/* ── Progress header ── */}
-                <div className="px-6 pt-5 pb-4 border-b" style={{ borderColor: 'var(--border-color)' }}>
-                  {/* Barre de progression globale */}
-                  <div className="flex items-center gap-3 mb-4">
+                <div className="px-6 pt-5 pb-4 border-b relative" style={{ borderColor: 'var(--border-color)' }}>
+
+                  {/* +10 XP Flash */}
+                  <AnimatePresence>
+                    {showXpFlash && (
+                      <motion.div
+                        key="xp"
+                        className="absolute right-6 top-4 font-bold pointer-events-none z-10"
+                        style={{ color: '#16a34a', fontSize: '1.1rem' }}
+                        initial={{ opacity: 1, y: 0, scale: 1 }}
+                        animate={{ opacity: 0, y: -38, scale: 1.25 }}
+                        transition={{ duration: 0.95, ease: 'easeOut' }}
+                      >
+                        +10 XP
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Route avec voiture */}
+                  <div className="relative h-11 rounded-xl overflow-hidden mb-3" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+                    <div className="absolute inset-0 flex items-center px-3">
+                      <div className="w-full h-px opacity-40"
+                        style={{ background: 'repeating-linear-gradient(90deg, transparent, transparent 10px, var(--border-color) 10px, var(--border-color) 18px)' }} />
+                    </div>
+                    <motion.div
+                      className="absolute left-0 top-0 bottom-0 rounded-xl"
+                      style={{ background: 'linear-gradient(90deg, rgba(45,106,79,0.18), rgba(82,183,136,0.22))' }}
+                      animate={{ width: `${progressWidth}%` }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                    />
+                    <motion.div
+                      className="absolute top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-md"
+                      style={{ backgroundColor: 'var(--brand)' }}
+                      animate={{ left: `max(4px, calc(${progressWidth}% - 20px))` }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                    >
+                      <Car className="w-4 h-4 text-white" />
+                    </motion.div>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 opacity-40">
+                      <Trophy className="w-4 h-4" style={{ color: 'var(--brand)' }} />
+                    </div>
+                  </div>
+
+                  {/* XP Bar + Niveau */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="font-mono text-xs font-bold tabular-nums" style={{ color: 'var(--brand)', minWidth: '2.5rem' }}>
+                      {xp} XP
+                    </span>
                     <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
                       <motion.div
                         className="h-full rounded-full"
-                        style={{ backgroundColor: 'var(--brand)' }}
-                        animate={{ width: `${progressWidth}%` }}
+                        style={{ background: 'linear-gradient(90deg, #2d6a4f, #52b788)' }}
+                        animate={{ width: `${(xp / 300) * 100}%` }}
                         transition={{ duration: 0.4, ease: 'easeOut' }}
                       />
                     </div>
-                    <span className="font-mono text-xs font-bold tabular-nums" style={{ color: 'var(--brand)', minWidth: '3.5rem', textAlign: 'right' }}>
-                      {current + 1} / 30
-                    </span>
+                    <div
+                      className="text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
+                      style={{ backgroundColor: `${currentLevel.color}20`, color: currentLevel.color }}
+                    >
+                      {currentLevel.name}
+                    </div>
                   </div>
 
                   {/* Segments de catégorie */}
