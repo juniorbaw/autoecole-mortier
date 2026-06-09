@@ -8,7 +8,7 @@ const FORMATIONS_CONTACT = [
   { label: 'Permis B auto 949€', id: 'bva' },
   { label: 'Accéléré 1 399€', id: 'accelere' },
   { label: 'AAC 1 199€', id: 'aac' },
-  { label: 'Code seul 299€', id: 'code' },
+  { label: 'Code en ligne 50€', id: 'code' },
   { label: 'Permis à 1€/jour', id: 'permis1' },
 ]
 

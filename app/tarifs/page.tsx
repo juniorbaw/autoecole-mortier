@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
-import { Check, Phone, AlertTriangle, BookOpen, Car, Zap, Rocket, CreditCard, Banknote, Landmark, FileText, GraduationCap, Euro, Info } from 'lucide-react'
+import { Check, Phone, AlertTriangle, BookOpen, Car, Zap, Rocket, CreditCard, Banknote, Landmark, FileText, GraduationCap, Euro, Info, Monitor } from 'lucide-react'
 
 export const metadata: Metadata = { title: 'Tarifs' }
 
 // ── Forfaits principaux ───────────────────────────────────────────────────────
 const PLANS = [
   {
-    Icon: BookOpen, title: 'Code Seul', price: '299€', sub: 'Cours en salle', featured: false,
-    features: ['Code en salle', 'Cours collectifs inclus', 'Suivi personnalisé', 'Inscription examen incluse'],
+    Icon: Monitor, title: 'Code en ligne', price: '50€', sub: 'Accès plateforme illimité', featured: false,
+    features: ['Accès illimité en ligne', 'Exercices thématiques', 'Statistiques de progression', 'Compatible mobile'],
   },
   {
     Icon: Car, title: 'Permis B Manuel', price: '1 099€', sub: 'Forfait 20h de conduite', featured: false,
@@ -321,10 +321,10 @@ export default function TarifsPage() {
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f7f9f5] rounded-xl">
-                    <span className="text-sm font-medium text-[#4a5a52]">Code Seul</span>
+                    <span className="text-sm font-medium text-[#4a5a52]">Code en ligne</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#2d6a4f] text-xl">254€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">299€</span>
+                      <span className="font-serif font-black text-[#2d6a4f] text-xl">42€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">50€</span>
                     </div>
                   </div>
                 </div>
@@ -359,10 +359,10 @@ export default function TarifsPage() {
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f0f9ff] rounded-xl">
-                    <span className="text-sm font-medium text-[#4a5a52]">Code Seul</span>
+                    <span className="text-sm font-medium text-[#4a5a52]">Code en ligne</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#3b82f6] text-xl">254€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">299€</span>
+                      <span className="font-serif font-black text-[#3b82f6] text-xl">42€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">50€</span>
                     </div>
                   </div>
                 </div>

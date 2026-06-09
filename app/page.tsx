@@ -389,7 +389,7 @@ const FORMATIONS_SIM = [
   { label: 'Permis B Manuel', price: 1099 },
   { label: 'Permis B Auto', price: 949 },
   { label: 'Accéléré', price: 1399 },
-  { label: 'Code seul', price: 299 },
+  { label: 'Code en ligne', price: 50 },
 ]
 
 const FINANCEMENTS = [

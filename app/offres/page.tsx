@@ -20,7 +20,7 @@ function SimulateurEconomies() {
     auto: { nom: 'Permis B Auto', prix: 949 },
     accelere: { nom: 'Formule Accélérée', prix: 1399 },
     aac: { nom: 'Conduite Accompagnée', prix: 1199 },
-    code: { nom: 'Code seul', prix: 299 }
+    code: { nom: 'Code en ligne', prix: 50 }
   }
   
   const calculerPrix = () => {
@@ -119,7 +119,7 @@ function SimulateurEconomies() {
           </div>
         </div>
         
-        {prixFinal > 299 && (
+        {prixFinal > 50 && (
           <div className="text-sm text-[#4a5a52] mb-4">
             Ou seulement <strong>{Math.round(prixFinal / 3)}€/mois</strong> en 3x
             {profil.jeune && prixFinal > 800 && (
@@ -266,10 +266,10 @@ export default function OffresPage() {
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-[#4a5a52]">Code seul :</span>
+                  <span className="text-sm text-[#4a5a52]">Code en ligne :</span>
                   <div className="text-right">
-                    <span className="text-sm line-through text-[#8a9690]">299€</span>
-                    <div className="font-bold text-[#2d6a4f]">255€</div>
+                    <span className="text-sm line-through text-[#8a9690]">50€</span>
+                    <div className="font-bold text-[#2d6a4f]">42€</div>
                   </div>
                 </div>
               </div>
