@@ -140,25 +140,24 @@ function SimulateurEconomies() {
 
 export default function OffresPage() {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-  
+
   useEffect(() => {
-    // Date de fin de l'offre rentrée (exemple : 31 mars)
-    const endDate = new Date('2024-03-31T23:59:59')
-    
-    const timer = setInterval(() => {
-      const now = new Date().getTime()
-      const distance = endDate.getTime() - now
-      
+    const tick = () => {
+      const now = new Date()
+      // Fin du mois en cours — se renouvelle automatiquement chaque mois
+      const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59)
+      const distance = endDate.getTime() - now.getTime()
       if (distance > 0) {
         setCountdown({
-          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          days:    Math.floor(distance / (1000 * 60 * 60 * 24)),
+          hours:   Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((distance % (1000 * 60)) / 1000)
+          seconds: Math.floor((distance % (1000 * 60)) / 1000),
         })
       }
-    }, 1000)
-    
+    }
+    tick()
+    const timer = setInterval(tick, 1000)
     return () => clearInterval(timer)
   }, [])
   
@@ -180,6 +179,27 @@ export default function OffresPage() {
           <p className="text-xl text-[#4a5a52] mb-8 max-w-2xl mx-auto">
             Parrainage, réductions étudiants, offre famille... On veut que le prix ne soit jamais un frein.
           </p>
+
+          {/* Countdown fin de mois */}
+          <div className="inline-flex flex-col items-center gap-2 bg-white border border-[#dde5dc] rounded-2xl px-8 py-4 shadow-sm">
+            <p className="text-xs font-semibold text-[#4a5a52] uppercase tracking-widest">Offres valables encore</p>
+            <div className="flex items-center gap-4">
+              {[
+                { value: countdown.days,    label: 'jours' },
+                { value: countdown.hours,   label: 'heures' },
+                { value: countdown.minutes, label: 'min' },
+                { value: countdown.seconds, label: 'sec' },
+              ].map(({ value, label }, i) => (
+                <div key={label} className="text-center">
+                  {i > 0 && <span className="text-[#2d6a4f] font-black text-2xl mx-1 -mt-1 inline-block">:</span>}
+                  <div className="font-mono text-3xl font-black text-[#2d6a4f] min-w-[2ch] tabular-nums">
+                    {String(value).padStart(2, '0')}
+                  </div>
+                  <div className="text-[10px] text-[#8a9690] uppercase tracking-widest">{label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -189,7 +209,7 @@ export default function OffresPage() {
           <div className="grid md:grid-cols-2 gap-8">
             
             {/* Carte 1 : Parrainage */}
-            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-[#2d6a4f] p-8 relative overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-[#2d6a4f] p-8 relative overflow-hidden card-hover animate-fade-up" style={{ animationDelay: '0s' }}>
               <div className="absolute top-4 right-4 bg-[#16a34a] text-white text-xs font-bold px-2 py-1 rounded">
                 ROI 16x
               </div>
@@ -241,7 +261,7 @@ export default function OffresPage() {
             </div>
 
             {/* Carte 2 : Étudiants */}
-            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-blue-500 p-8">
+            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-blue-500 p-8 card-hover animate-fade-up" style={{ animationDelay: '0.1s' }}>
               <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
                 <GraduationCap className="w-6 h-6 text-blue-500" />
               </div>
@@ -286,7 +306,7 @@ export default function OffresPage() {
             </div>
 
             {/* Carte 3 : Famille */}
-            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-amber-500 p-8">
+            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-amber-500 p-8 card-hover animate-fade-up" style={{ animationDelay: '0.2s' }}>
               <div className="w-12 h-12 bg-amber-500/10 rounded-full flex items-center justify-center mb-6">
                 <Heart className="w-6 h-6 text-amber-500" />
               </div>
@@ -321,7 +341,7 @@ export default function OffresPage() {
             </div>
 
             {/* Carte 4 : Premier de la classe */}
-            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-amber-500 p-8">
+            <div className="bg-white rounded-2xl shadow-sm border-l-4 border-l-amber-500 p-8 card-hover animate-fade-up" style={{ animationDelay: '0.3s' }}>
               <div className="w-12 h-12 bg-amber-500/10 rounded-full flex items-center justify-center mb-6">
                 <Trophy className="w-6 h-6 text-amber-500" />
               </div>

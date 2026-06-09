@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import MobileBar from "@/components/MobileBar";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import OffresPopup from "@/components/OffresPopup";
+import ScrollProgress from "@/components/ScrollProgress";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from '@vercel/analytics/react';
 
@@ -106,6 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )}
         <ThemeProvider>
+          <ScrollProgress />
           <Navbar />
           <main className="pt-16 min-h-screen">{children}</main>
           <Footer />
