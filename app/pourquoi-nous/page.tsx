@@ -7,7 +7,7 @@ const COMPARATIF = [
   { critere: 'Note VroomVroom', mortier: '5.0/5', fargeau: '4.8/5', cer: '4.5/5', ornikar: '3.8/5', gambetta: '4.2/5' },
   { critere: 'Nombre d\'avis', mortier: '26 avis', fargeau: '231', cer: '~80', ornikar: 'Variable', gambetta: '~40' },
   { critere: 'Forfait 20h BVM', mortier: '1 099€', fargeau: '1 390€', cer: '~1 400€', ornikar: '~1 100€*', gambetta: '~1 350€' },
-  { critere: 'Forfait BVA 13h', mortier: '899€', fargeau: '~1 100€', cer: '~1 100€', ornikar: '~850€*', gambetta: '~1 050€' },
+  { critere: 'Forfait BVA 13h', mortier: '949€', fargeau: '~1 100€', cer: '~1 100€', ornikar: '~850€*', gambetta: '~1 050€' },
   { critere: 'Formule accélérée', mortier: true, fargeau: true, cer: true, ornikar: false, gambetta: null },
   { critere: 'Permis à 1€/jour', mortier: true, fargeau: true, cer: true, ornikar: false, gambetta: true },
   { critere: 'CPF / Qualiopi', mortier: true, fargeau: true, cer: true, ornikar: true, gambetta: null },

@@ -47,6 +47,73 @@ function AnimatedCounter({ target, suffix = '', decimals = 0 }: { target: number
   return <span ref={ref}>{decimals > 0 ? count.toFixed(decimals) : count}{suffix}</span>
 }
 
+// ── Voiture qui roule (Option B) ─────────────────────────────────────────────
+function CarDriving() {
+  return (
+    <div className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg-main)', height: '88px' }}>
+      {/* Route pointillée */}
+      <div className="absolute left-0 right-0" style={{ bottom: '18px', borderBottom: '2px dashed var(--border-color)', opacity: 0.45 }} />
+
+      {/* Voiture animée */}
+      <div className="absolute" style={{ bottom: '6px', animationName: 'carDrive', animationDuration: '14s', animationTimingFunction: 'linear', animationIterationCount: 'infinite', animationDelay: '1s' }}>
+        {/* Trainée de feuilles */}
+        <div className="absolute flex items-end" style={{ right: '100%', gap: '5px', paddingRight: '6px', bottom: '6px' }}>
+          {[
+            { size: 10, op: 0.9, mb: 0,  rot: -15, a: 'leafDrift1', d: '0s'   },
+            { size: 8,  op: 0.7, mb: 8,  rot: 22,  a: 'leafDrift2', d: '0.18s' },
+            { size: 12, op: 0.5, mb: 3,  rot: -28, a: 'leafDrift1', d: '0.35s' },
+            { size: 7,  op: 0.3, mb: 11, rot: 10,  a: 'leafDrift2', d: '0.52s' },
+            { size: 9,  op: 0.15, mb: 1, rot: -32, a: 'leafDrift1', d: '0.7s'  },
+          ].map((leaf, i) => (
+            <div key={i} style={{ marginBottom: `${leaf.mb}px`, animationName: leaf.a, animationDuration: '1.3s', animationTimingFunction: 'ease-in-out', animationIterationCount: 'infinite', animationDirection: 'alternate', animationDelay: leaf.d }}>
+              <svg width={leaf.size} height={leaf.size} viewBox="0 0 24 24" style={{ opacity: leaf.op, transform: `rotate(${leaf.rot}deg)`, display: 'block' }}>
+                <path d="M12 2C9 4.5 3 9 3 14c0 4.4 3.6 8 9 8s9-3.6 9-8C21 9 15 4.5 12 2z" fill="#2d6a4f" />
+              </svg>
+            </div>
+          ))}
+        </div>
+
+        {/* Toyota Yaris — vue latérale */}
+        <svg width="148" height="64" viewBox="0 0 148 64">
+          {/* Corps bas */}
+          <rect x="8" y="32" width="132" height="24" rx="5" fill="white" />
+          {/* Toit/cabine */}
+          <path d="M 32 32 L 44 13 L 100 13 L 120 32 Z" fill="white" />
+          {/* Lunette arrière */}
+          <path d="M 32 32 L 44 13 L 60 13 L 46 32 Z" fill="rgba(45,106,79,0.17)" />
+          {/* Pare-brise avant */}
+          <path d="M 100 13 L 118 32 L 120 32 L 102 13 Z" fill="rgba(45,106,79,0.17)" />
+          {/* Contours */}
+          <rect x="8" y="32" width="132" height="24" rx="5" fill="none" stroke="#dde5dc" strokeWidth="1.5" />
+          <path d="M 32 32 L 44 13 L 100 13 L 120 32" fill="none" stroke="#dde5dc" strokeWidth="1.5" />
+          {/* Ligne de porte */}
+          <line x1="74" y1="32" x2="76" y2="54" stroke="#e5e7eb" strokeWidth="1.2" />
+          {/* Bande verte latérale */}
+          <path d="M 10 50 Q 74 48 138 50" stroke="rgba(45,106,79,0.22)" strokeWidth="2.5" fill="none" />
+          {/* Roue avant */}
+          <circle cx="118" cy="56" r="10" fill="#2a2a2a" />
+          <circle cx="118" cy="56" r="6"  fill="#555" />
+          <circle cx="118" cy="56" r="2.5" fill="#aaa" />
+          {/* Roue arrière */}
+          <circle cx="34"  cy="56" r="10" fill="#2a2a2a" />
+          <circle cx="34"  cy="56" r="6"  fill="#555" />
+          <circle cx="34"  cy="56" r="2.5" fill="#aaa" />
+          {/* Phares avant */}
+          <rect x="136" y="38" width="7" height="10" rx="2" fill="#fef08a" opacity="0.95" />
+          <rect x="136" y="50" width="5" height="4"  rx="1" fill="rgba(254,240,138,0.55)" />
+          {/* Feux arrière */}
+          <rect x="5" y="38" width="6" height="10" rx="2" fill="#ef4444" opacity="0.85" />
+          {/* Rétroviseur */}
+          <rect x="122" y="24" width="8" height="4" rx="1.5" fill="#e5e7eb" />
+          {/* Pare-chocs */}
+          <rect x="139" y="50" width="5" height="6" rx="2" fill="#f0f0f0" />
+          <rect x="4"   y="50" width="5" height="6" rx="2" fill="#f0f0f0" />
+        </svg>
+      </div>
+    </div>
+  )
+}
+
 // ── Feuilles flottantes (éco-conduite) ──────────────────────────────────────
 const LEAF_CONFIG = [
   { left:  5, size: 14, delay: 0,   dur: 9  },
@@ -309,7 +376,7 @@ const FORMATIONS_HOME = [
   {
     Icon: Zap, tag: 'Spécialité', tagBg: 'bg-blue-100 text-blue-700',
     title: 'Permis B Automatique', desc: 'Notre spécialité ! 13h minimum, plus simple et rapide.',
-    price: '899€', unit: '/ forfait 13h',
+    price: '949€', unit: '/ forfait 13h',
   },
   {
     Icon: Rocket, tag: 'Tendance', tagBg: 'bg-amber-100 text-amber-700',
@@ -320,7 +387,7 @@ const FORMATIONS_HOME = [
 
 const FORMATIONS_SIM = [
   { label: 'Permis B Manuel', price: 1099 },
-  { label: 'Permis B Auto', price: 899 },
+  { label: 'Permis B Auto', price: 949 },
   { label: 'Accéléré', price: 1399 },
   { label: 'Code seul', price: 299 },
 ]
@@ -992,7 +1059,12 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════════
-          MESSAGE DU FONDATEUR — Seyba Doucouré
+          VOITURE QUI ROULE
+      ══════════════════════════════════════════════════════════════════════ */}
+      <CarDriving />
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          MESSAGE DU FONDATEUR — Seyba
       ══════════════════════════════════════════════════════════════════════ */}
       <section className="py-24 px-6 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-main)' }}>
         {/* Decorative quote watermark */}
@@ -1021,7 +1093,7 @@ export default function HomePage() {
                 S
               </div>
               <h3 className="font-serif font-black text-xl mb-1" style={{ color: 'var(--dark-text)' }}>
-                Seyba Doucouré
+                Seyba
               </h3>
               <p className="text-sm font-semibold mb-2" style={{ color: 'var(--brand)' }}>
                 Directeur & Fondateur
@@ -1130,7 +1202,7 @@ export default function HomePage() {
             {[
               {
                 initial: 'S',
-                name: 'Seyba Doucouré',
+                name: 'Seyba',
                 role: 'Directeur & Fondateur',
                 desc: 'Il veille à ce que chaque élève soit prêt — sans heure de trop ni pression commerciale.',
                 color: '#2d6a4f',

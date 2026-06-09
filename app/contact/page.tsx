@@ -4,8 +4,8 @@ import Image from 'next/image'
 import { Phone, MapPin, Clock, Train, ChevronDown, Check, Send, Calendar, FileSignature } from 'lucide-react'
 
 const FORMATIONS_CONTACT = [
-  { label: 'Permis B manuel 1 100€', id: 'bvm' },
-  { label: 'Permis B auto 950€', id: 'bva' },
+  { label: 'Permis B manuel 1 099€', id: 'bvm' },
+  { label: 'Permis B auto 949€', id: 'bva' },
   { label: 'Accéléré 1 399€', id: 'accelere' },
   { label: 'AAC 1 199€', id: 'aac' },
   { label: 'Code seul 299€', id: 'code' },

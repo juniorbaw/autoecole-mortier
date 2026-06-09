@@ -241,6 +241,21 @@ body::before {
   50%       { opacity: 0.35; }
 }
 
+@keyframes carDrive {
+  0%   { transform: translateX(-220px); }
+  100% { transform: translateX(calc(100vw + 220px)); }
+}
+
+@keyframes leafDrift1 {
+  0%   { transform: translateY(0px)  rotate(0deg);  }
+  100% { transform: translateY(-11px) rotate(18deg); }
+}
+
+@keyframes leafDrift2 {
+  0%   { transform: translateY(0px) rotate(0deg);  }
+  100% { transform: translateY(-8px)  rotate(-14deg); }
+}
+
 @keyframes ping-slow {
   0%, 100% { transform: scale(1); }
   50%       { transform: scale(1.1); }

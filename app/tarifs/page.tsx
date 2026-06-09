@@ -10,11 +10,11 @@ const PLANS = [
     features: ['Code en salle', 'Cours collectifs inclus', 'Suivi personnalisé', 'Inscription examen incluse'],
   },
   {
-    Icon: Car, title: 'Permis B Manuel', price: '1 100€', sub: 'Forfait 20h de conduite', featured: false,
+    Icon: Car, title: 'Permis B Manuel', price: '1 099€', sub: 'Forfait 20h de conduite', featured: false,
     features: ['Numéro NEPH inclus', 'Code en salle inclus', '20h de conduite', 'Finançable CPF', 'Compatible permis 1€/jour', 'Moniteurs certifiés'],
   },
   {
-    Icon: Zap, title: 'Permis B Automatique', price: '950€', sub: 'Notre spécialité — forfait 13h', featured: true,
+    Icon: Zap, title: 'Permis B Automatique', price: '949€', sub: 'Notre spécialité — forfait 13h', featured: true,
     features: ['Numéro NEPH inclus', 'Code en salle inclus', '13h de conduite', 'Plus accessible & rapide', 'Finançable CPF', 'Compatible permis 1€/jour'],
   },
   {
@@ -25,16 +25,16 @@ const PLANS = [
 
 // ── Grilles tarifaires complètes ─────────────────────────────────────────────
 const BVM_TABLE = [
-  { heures: 20, normal: 1100, accelere: 1300 },
-  { heures: 25, normal: 1400, accelere: 1600 },
-  { heures: 30, normal: 1700, accelere: 1900 },
-  { heures: 35, normal: 2000, accelere: 2200 },
-  { heures: 40, normal: 2300, accelere: 2500 },
+  { heures: 20, normal: 1099, accelere: 1299 },
+  { heures: 25, normal: 1399, accelere: 1599 },
+  { heures: 30, normal: 1699, accelere: 1899 },
+  { heures: 35, normal: 1999, accelere: 2199 },
+  { heures: 40, normal: 2299, accelere: 2499 },
 ]
 
 const BVA_TABLE = [
-  { heures: 13, normal: 950,  accelere: null },
-  { heures: 20, normal: 1350, accelere: 1500 },
+  { heures: 13, normal: 949,  accelere: null },
+  { heures: 20, normal: 1349, accelere: 1499 },
   { heures: 25, normal: 1675, accelere: 1825 },
   { heures: 30, normal: 2050, accelere: 2200 },
   { heures: 35, normal: 2375, accelere: 2525 },
@@ -309,15 +309,15 @@ export default function TarifsPage() {
                   <div className="flex items-center justify-between p-3 bg-[#f7f9f5] rounded-xl">
                     <span className="text-sm font-medium text-[#4a5a52]">Permis B Manuel 20h</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#2d6a4f] text-xl">935€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">1 100€</span>
+                      <span className="font-serif font-black text-[#2d6a4f] text-xl">934€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">1 099€</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f7f9f5] rounded-xl">
                     <span className="text-sm font-medium text-[#4a5a52]">Permis B Auto 13h</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#2d6a4f] text-xl">808€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">950€</span>
+                      <span className="font-serif font-black text-[#2d6a4f] text-xl">807€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">949€</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f7f9f5] rounded-xl">
@@ -347,15 +347,15 @@ export default function TarifsPage() {
                   <div className="flex items-center justify-between p-3 bg-[#f0f9ff] rounded-xl">
                     <span className="text-sm font-medium text-[#4a5a52]">Permis B Manuel 20h</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#3b82f6] text-xl">935€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">1 100€</span>
+                      <span className="font-serif font-black text-[#3b82f6] text-xl">934€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">1 099€</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f0f9ff] rounded-xl">
                     <span className="text-sm font-medium text-[#4a5a52]">Permis B Auto 13h</span>
                     <div className="text-right">
-                      <span className="font-serif font-black text-[#3b82f6] text-xl">808€</span>
-                      <span className="text-xs text-[#8a9690] ml-1 line-through">950€</span>
+                      <span className="font-serif font-black text-[#3b82f6] text-xl">807€</span>
+                      <span className="text-xs text-[#8a9690] ml-1 line-through">949€</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-[#f0f9ff] rounded-xl">

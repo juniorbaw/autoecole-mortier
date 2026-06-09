@@ -17,7 +17,7 @@ function SimulateurEconomies() {
   
   const formations = {
     manuel: { nom: 'Permis B Manuel', prix: 1099 },
-    auto: { nom: 'Permis B Auto', prix: 899 },
+    auto: { nom: 'Permis B Auto', prix: 949 },
     accelere: { nom: 'Formule Accélérée', prix: 1399 },
     aac: { nom: 'Conduite Accompagnée', prix: 1199 },
     code: { nom: 'Code seul', prix: 299 }
@@ -261,8 +261,8 @@ export default function OffresPage() {
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-[#4a5a52]">Permis B Auto :</span>
                   <div className="text-right">
-                    <span className="text-sm line-through text-[#8a9690]">899€</span>
-                    <div className="font-bold text-[#2d6a4f]">765€</div>
+                    <span className="text-sm line-through text-[#8a9690]">949€</span>
+                    <div className="font-bold text-[#2d6a4f]">807€</div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
