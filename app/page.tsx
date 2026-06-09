@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   Phone, Star, Check, ArrowRight, MapPin, ChevronRight,
   Quote, Leaf, Shield, Award, Zap, Clock, Users, TrendingUp,
@@ -45,6 +45,225 @@ function AnimatedCounter({ target, suffix = '', decimals = 0 }: { target: number
   }, [target, decimals])
 
   return <span ref={ref}>{decimals > 0 ? count.toFixed(decimals) : count}{suffix}</span>
+}
+
+// ── Feuilles flottantes (éco-conduite) ──────────────────────────────────────
+const LEAF_CONFIG = [
+  { left:  5, size: 14, delay: 0,   dur: 9  },
+  { left: 15, size: 10, delay: 1.2, dur: 11 },
+  { left: 28, size: 18, delay: 2.4, dur: 8  },
+  { left: 40, size: 12, delay: 0.7, dur: 13 },
+  { left: 52, size: 16, delay: 3.1, dur: 10 },
+  { left: 63, size: 11, delay: 1.8, dur: 9  },
+  { left: 72, size: 15, delay: 4.0, dur: 12 },
+  { left: 82, size: 13, delay: 2.6, dur: 8  },
+  { left: 90, size: 17, delay: 0.4, dur: 11 },
+  { left:  8, size:  9, delay: 5.0, dur: 10 },
+  { left: 35, size: 14, delay: 3.5, dur: 9  },
+  { left: 58, size: 11, delay: 1.0, dur: 13 },
+  { left: 78, size: 16, delay: 4.5, dur: 8  },
+  { left: 22, size: 12, delay: 6.0, dur: 12 },
+  { left: 47, size: 10, delay: 2.0, dur: 10 },
+]
+
+function LeafParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }} aria-hidden>
+      {LEAF_CONFIG.map((leaf, i) => (
+        <div
+          key={i}
+          className="absolute top-0"
+          style={{
+            left: `${leaf.left}%`,
+            animationName: 'leafFall',
+            animationDuration: `${leaf.dur}s`,
+            animationDelay: `${leaf.delay}s`,
+            animationIterationCount: 'infinite',
+            animationTimingFunction: 'linear',
+            animationFillMode: 'both',
+          }}
+        >
+          <svg width={leaf.size} height={leaf.size} viewBox="0 0 24 24" aria-hidden>
+            <path d="M12 2C9 4.5 3 9 3 14c0 4.4 3.6 8 9 8s9-3.6 9-8C21 9 15 4.5 12 2z" fill="rgba(82,183,136,0.28)" />
+            <path d="M12 6v14" stroke="rgba(82,183,136,0.18)" strokeWidth="0.8" fill="none" />
+            <path d="M12 8 C 10 10, 8 12, 9 14" stroke="rgba(82,183,136,0.15)" strokeWidth="0.6" fill="none" />
+          </svg>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ── Route animée (parcours) ───────────────────────────────────────────────────
+const ROAD_PATH = "M 95,60 C 175,60 220,20 285,20 C 350,20 415,100 475,100 C 545,100 600,60 665,60"
+
+const ROAD_STEPS = [
+  { label: 'Inscription', Icon: FileText, cx: 95,  cy: 60,  threshold: 0    },
+  { label: 'Code',        Icon: BookOpen, cx: 285, cy: 20,  threshold: 0.28 },
+  { label: 'Conduite',    Icon: Car,      cx: 475, cy: 100, threshold: 0.62 },
+  { label: 'Permis',      Icon: Trophy,   cx: 665, cy: 60,  threshold: 0.9  },
+]
+
+function RoadLabel({ step, progress }: { step: typeof ROAD_STEPS[0]; progress: number }) {
+  const active = progress >= step.threshold
+  return (
+    <div
+      className="flex flex-col items-center gap-1.5"
+      style={{ opacity: active ? 1 : 0.38, transition: 'opacity 0.45s ease' }}
+    >
+      <div
+        className="w-10 h-10 rounded-xl flex items-center justify-center"
+        style={{
+          backgroundColor: active ? 'var(--brand)' : 'var(--bg-secondary)',
+          border: `2px solid ${active ? 'var(--brand)' : 'var(--border-color)'}`,
+          transform: active ? 'scale(1.12)' : 'scale(1)',
+          transition: 'all 0.45s ease',
+        }}
+      >
+        <step.Icon className="w-4 h-4" style={{ color: active ? 'white' : 'var(--secondary-text)' }} />
+      </div>
+      <span
+        className="text-xs font-bold text-center leading-tight"
+        style={{ color: active ? 'var(--brand)' : 'var(--secondary-text)', transition: 'color 0.45s' }}
+      >
+        {step.label}
+      </span>
+    </div>
+  )
+}
+
+function RoadParcours() {
+  const ref = useRef<HTMLDivElement>(null)
+  const pathRef = useRef<SVGPathElement>(null)
+  const [pathLength, setPathLength] = useState(680)
+  const [progress, setProgress] = useState(0)
+
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 75%', 'end 25%'] })
+
+  useEffect(() => {
+    if (pathRef.current) setPathLength(pathRef.current.getTotalLength())
+  }, [])
+
+  useEffect(() => {
+    return scrollYProgress.on('change', setProgress)
+  }, [scrollYProgress])
+
+  const dashOffset = useTransform(scrollYProgress, [0, 1], [pathLength, 0])
+  const carX      = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [95, 285, 475, 665])
+  const carY      = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [60, 20, 100, 60])
+  const carRotate = useTransform(scrollYProgress, [0, 0.15, 0.3, 0.45, 0.6, 0.75, 1], [0, -18, 0, 18, 0, -14, 0])
+
+  return (
+    <section className="py-20 px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+      <div ref={ref} className="max-w-4xl mx-auto">
+        <motion.div
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="font-mono text-xs font-semibold tracking-widest uppercase" style={{ color: 'var(--brand)' }}>
+            Ton parcours
+          </span>
+          <h2 className="font-serif italic font-black mt-2" style={{ color: 'var(--dark-text)', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
+            Ton chemin vers le permis
+          </h2>
+          <p className="text-xs mt-2 font-medium" style={{ color: 'var(--secondary-text)' }}>
+            ↓ Scrolle pour voir la route se tracer
+          </p>
+        </motion.div>
+
+        <div className="select-none">
+          {/* Rangée du haut : Code (col 2) + Permis (col 4) */}
+          <div className="grid grid-cols-4 gap-4 mb-2 items-end">
+            <div />
+            <RoadLabel step={ROAD_STEPS[1]} progress={progress} />
+            <div />
+            <RoadLabel step={ROAD_STEPS[3]} progress={progress} />
+          </div>
+
+          {/* Route SVG */}
+          <div style={{ height: '138px' }}>
+            <svg viewBox="0 0 760 120" className="w-full h-full" style={{ overflow: 'visible' }}>
+              {/* Ombre route */}
+              <path d={ROAD_PATH} stroke="rgba(0,0,0,0.07)" strokeWidth={30} fill="none" strokeLinecap="round" />
+              {/* Base route (grise) */}
+              <path d={ROAD_PATH} stroke="#dde5dc" strokeWidth={22} fill="none" strokeLinecap="round" />
+              {/* Route verte animée */}
+              <motion.path
+                ref={pathRef}
+                d={ROAD_PATH}
+                stroke="#2d6a4f"
+                strokeWidth={20}
+                fill="none"
+                strokeLinecap="round"
+                strokeDasharray={pathLength}
+                style={{ strokeDashoffset: dashOffset }}
+              />
+              {/* Pointillés centre */}
+              <motion.path
+                d={ROAD_PATH}
+                stroke="rgba(255,255,255,0.6)"
+                strokeWidth={2.5}
+                fill="none"
+                strokeDasharray="18 14"
+                style={{ strokeDashoffset: dashOffset }}
+              />
+              {/* Bornes étapes */}
+              {ROAD_STEPS.map((step, i) => {
+                const active = progress >= step.threshold
+                return (
+                  <g key={step.label}>
+                    {active && <circle cx={step.cx} cy={step.cy} r={20} fill="rgba(45,106,79,0.18)" />}
+                    <circle
+                      cx={step.cx} cy={step.cy} r={13}
+                      style={{ fill: active ? '#2d6a4f' : '#f7f9f5', stroke: active ? '#2d6a4f' : '#dde5dc', strokeWidth: 3, transition: 'fill 0.4s, stroke 0.4s' }}
+                    />
+                    <text x={step.cx} y={step.cy + 4.5} textAnchor="middle" fontSize="11" fontWeight="700"
+                      style={{ fill: active ? 'white' : '#8a9690', transition: 'fill 0.4s' }}>
+                      {i + 1}
+                    </text>
+                  </g>
+                )
+              })}
+              {/* Voiture (vue dessus) */}
+              <motion.g style={{ x: carX, y: carY, rotate: carRotate }}>
+                <rect x="-12" y="-7" width="24" height="14" rx="4" fill="white" stroke="#2d6a4f" strokeWidth="2" />
+                <rect x="-5" y="-5" width="10" height="5" rx="1.5" fill="rgba(45,106,79,0.18)" />
+                <rect x="-5" y="0" width="10" height="4" rx="1" fill="rgba(45,106,79,0.1)" />
+                <rect x="-14" y="-8"  width="5" height="3.5" rx="1.2" fill="#1a2e22" />
+                <rect x="-14" y="4.5" width="5" height="3.5" rx="1.2" fill="#1a2e22" />
+                <rect x="9"   y="-8"  width="5" height="3.5" rx="1.2" fill="#1a2e22" />
+                <rect x="9"   y="4.5" width="5" height="3.5" rx="1.2" fill="#1a2e22" />
+                <rect x="11"  y="-5"  width="3" height="2.5" rx="0.5" fill="#fef08a" />
+                <rect x="11"  y="2.5" width="3" height="2.5" rx="0.5" fill="#fef08a" />
+              </motion.g>
+            </svg>
+          </div>
+
+          {/* Rangée du bas : Inscription (col 1) + Conduite (col 3) */}
+          <div className="grid grid-cols-4 gap-4 mt-2 items-start">
+            <RoadLabel step={ROAD_STEPS[0]} progress={progress} />
+            <div />
+            <RoadLabel step={ROAD_STEPS[2]} progress={progress} />
+            <div />
+          </div>
+        </div>
+
+        <div className="text-center mt-10">
+          <Link
+            href="#formations"
+            className="inline-flex items-center gap-2 text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm"
+            style={{ backgroundColor: 'var(--brand)' }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'var(--brand-dark)')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'var(--brand)')}
+          >
+            Commence ton parcours maintenant <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 // ── Data ─────────────────────────────────────────────────────────────────────
@@ -111,13 +330,6 @@ const FINANCEMENTS = [
   { label: 'Permis 1€/jour', id: 'permis1' },
   { label: 'Paiement 3x', id: 'x3' },
   { label: 'Paiement personnel', id: 'perso' },
-]
-
-const STEPS = [
-  { Icon: FileText,       label: 'Inscription', done: true },
-  { Icon: BookOpen,       label: 'Code',        done: true },
-  { Icon: Car,            label: 'Conduite',    done: false },
-  { Icon: Trophy,         label: 'Permis',      done: false },
 ]
 
 // ── Animation variants ───────────────────────────────────────────────────────
@@ -707,6 +919,9 @@ export default function HomePage() {
         <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-20 float-circle"
           style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.4) 0%, transparent 70%)' }} />
 
+        {/* Feuilles flottantes */}
+        <LeafParticles />
+
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -1246,67 +1461,9 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════════
-          PARCOURS GAMIFIÉ
+          PARCOURS — ROUTE ANIMÉE
       ══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            className="text-center mb-14"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="font-mono text-xs font-semibold tracking-widest uppercase" style={{ color: 'var(--brand)' }}>
-              Ton parcours
-            </span>
-            <h2 className="font-serif italic font-black mt-2" style={{ color: 'var(--dark-text)', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
-              Ton chemin vers le permis
-            </h2>
-          </motion.div>
-
-          <div className="relative flex justify-between items-start">
-            <div className="absolute top-7 left-[14%] right-[14%] h-0.5" style={{ backgroundColor: 'var(--border-color)' }} />
-            {STEPS.map((step, i) => (
-              <motion.div
-                key={step.label}
-                className="relative flex flex-col items-center gap-3 flex-1"
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-              >
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center border-2 z-10 shadow-sm transition-all"
-                  style={{
-                    backgroundColor: step.done ? 'var(--brand)' : 'var(--card-bg)',
-                    borderColor: step.done ? 'var(--brand)' : 'var(--border-color)',
-                  }}
-                >
-                  <step.Icon className="w-6 h-6" style={{ color: step.done ? 'white' : 'var(--brand)' }} />
-                </div>
-                <span
-                  className="text-xs font-semibold text-center"
-                  style={{ color: step.done ? 'var(--brand)' : 'var(--secondary-text)' }}
-                >
-                  {step.label}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="#formations"
-              className="inline-flex items-center gap-2 text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm"
-              style={{ backgroundColor: 'var(--brand)' }}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'var(--brand-dark)')}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'var(--brand)')}
-            >
-              Commence ton parcours maintenant <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <RoadParcours />
 
       {/* ══════════════════════════════════════════════════════════════════════
           QUIZ TEASER
