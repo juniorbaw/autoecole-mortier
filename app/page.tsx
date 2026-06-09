@@ -536,7 +536,7 @@ export default function HomePage() {
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
                 </div>
                 <p className="text-sm" style={{ color: 'var(--secondary-text)' }}>
-                  <strong style={{ color: 'var(--dark-text)' }}>5.0/5</strong> · 26 avis vérifiés
+                  <strong style={{ color: 'var(--dark-text)' }}>5.0/5</strong> · 32 avis vérifiés
                 </p>
               </div>
             </motion.div>
@@ -575,7 +575,7 @@ export default function HomePage() {
                   { Icon: Star,           value: 5.0, suffix: '/5',  label: 'Note moyenne',    decimals: 1 },
                   { Icon: Trophy,         value: 96,  suffix: '%',   label: 'Satisfaction',    decimals: 0 },
                   { Icon: Euro,           value: 1,   suffix: '€/j', label: 'Permis à 1€',     decimals: 0 },
-                  { Icon: MessageCircle,  value: 26,  suffix: '',    label: 'Avis vérifiés',   decimals: 0 },
+                  { Icon: MessageCircle,  value: 32,  suffix: '',    label: 'Avis vérifiés',   decimals: 0 },
                 ].map(({ Icon, value, suffix, label, decimals }) => (
                   <div
                     key={label}
@@ -769,7 +769,7 @@ export default function HomePage() {
                   5.0
                 </div>
                 <p className="font-bold" style={{ color: 'var(--dark-text)' }}>Note Google</p>
-                <p className="text-sm" style={{ color: 'var(--secondary-text)' }}>sur 26 avis vérifiés</p>
+                <p className="text-sm" style={{ color: 'var(--secondary-text)' }}>sur 32 avis vérifiés</p>
               </div>
             </motion.div>
 
@@ -1333,7 +1333,7 @@ export default function HomePage() {
                   color: 'var(--dark-text)',
                 }}
               >
-                <Check className="w-3 h-3 text-[#16a34a]" /> 26 avis vérifiés
+                <Check className="w-3 h-3 text-[#16a34a]" /> 32 avis vérifiés
               </span>
             </div>
 
@@ -1408,7 +1408,7 @@ export default function HomePage() {
                 backgroundColor: 'var(--card-bg)',
               }}
             >
-              Voir les 26 avis <ArrowRight className="w-4 h-4" />
+              Voir les 32 avis <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -1516,7 +1516,7 @@ export default function HomePage() {
             {[
               { label: '100% satisfait',       Icon: TrendingUp, value: 100,  decimals: 0 },
               { label: 'Note Google',          Icon: Star,       value: 5.0,  decimals: 1 },
-              { label: 'Avis vérifiés',        Icon: Check,      value: 26,   decimals: 0 },
+              { label: 'Avis vérifiés',        Icon: Check,      value: 32,   decimals: 0 },
               { label: 'Semaines en moyenne',  Icon: Clock,      value: 3,    decimals: 0, unit: 'sem' },
             ].map((stat, i) => (
               <motion.div key={stat.label} variants={fadeUp} custom={i} className="text-center">

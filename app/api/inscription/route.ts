@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
           </div>
 
           <div style="padding: 20px 24px; background: #1a2e22; color: #b5c4bb; text-align: center; font-size: 13px; line-height: 1.5;">
-            Auto-école la mieux notée du 20ème · Note 5.0/5 sur 26 avis vérifiés
+            Auto-école la mieux notée du 20ème · Note 5.0/5 sur 32 avis vérifiés
           </div>
         </div>
       `,

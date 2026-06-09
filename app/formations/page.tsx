@@ -10,7 +10,7 @@ const FORMATIONS = [
   { Icon: Users,      tag: 'Recommandé', tagColor: 'bg-green-100 text-green-700', title: 'Conduite Accompagnée AAC', price: '1 199€', sub: 'Dès 15 ans — La plus économique', features: ['Dès 15 ans', 'Accompagné par un proche', 'Conduite supervisée incluse', 'Finançable CPF', 'Moins d\'heures payantes', 'Bonus assurance'] },
   { Icon: Euro,       tag: '15-25 ans', tagColor: 'bg-green-100 text-green-700', title: 'Permis à 1€/jour', price: '~30€/mois', sub: 'Prêt à taux zéro — pour les 15-25 ans', features: ['Prêt sans intérêt', 'Pour les 15-25 ans', 'On monte le dossier', 'Banque partenaire', 'Remboursement flexible', 'Zéro frais de dossier'] },
   { Icon: Eye,        tag: 'Post-permis', tagColor: 'bg-gray-100 text-gray-700', title: 'Conduite Supervisée', price: 'Sur devis', sub: 'Pour les permis récents', features: ['Après l\'obtention du permis', 'Réduction franchise assurance', 'Accompagné par un proche', 'Période probatoire accélérée', 'Conseils personnalisés', 'Flexibilité totale'] },
-  { Icon: Repeat,     tag: 'Passerelle', tagColor: 'bg-orange-100 text-orange-700', title: 'Passerelle BVA→BVM', price: '349€', sub: 'Passer de l\'automatique au manuel', features: ['7h de conduite minimum', 'Examen pratique uniquement', 'Rapide et efficace', 'Moniteurs experts', 'Flexibilité des créneaux', 'Attestation officielle'] },
+  { Icon: Repeat,     tag: 'Passerelle', tagColor: 'bg-orange-100 text-orange-700', title: 'Passerelle BVA→BVM', price: '420€', sub: 'Passer de l\'automatique au manuel', features: ['7h de conduite minimum', 'Examen pratique uniquement', 'Rapide et efficace', 'Moniteurs experts', 'Flexibilité des créneaux', 'Attestation officielle'] },
   { Icon: Smartphone, tag: 'En ligne', tagColor: 'bg-purple-100 text-purple-700', title: 'Code en ligne', price: '50€', sub: 'Accès plateforme illimité', features: ['Accès illimité en ligne', 'Exercices thématiques', 'Statistiques de progression', 'Compatible mobile', 'Disponible 24h/24', 'Mises à jour incluses'] },
   { Icon: RefreshCcw, tag: 'Récupération', tagColor: 'bg-red-100 text-red-700', title: 'Annulation de Permis', price: 'Sur devis', sub: 'Récupérer son permis annulé', features: ['Bilan de compétences', 'Stage de sensibilisation', 'Accompagnement juridique', 'Suivi personnalisé', 'Démarches administratives', 'Discrétion assurée'] },
 ]
@@ -34,8 +34,12 @@ export default function FormationsPage() {
       {/* Grille formations */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FORMATIONS.map((f) => (
-            <div key={f.title} className="bg-white rounded-2xl border border-[#dde5dc] overflow-hidden card-hover flex flex-col">
+          {FORMATIONS.map((f, i) => (
+            <div
+              key={f.title}
+              className="bg-white rounded-2xl border border-[#dde5dc] overflow-hidden card-hover flex flex-col animate-fade-up"
+              style={{ animationDelay: `${i * 0.07}s` }}
+            >
               <div className="p-6 flex-1">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-[#2d6a4f]/10 flex items-center justify-center">

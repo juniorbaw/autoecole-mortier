@@ -93,8 +93,12 @@ export default function TarifsPage() {
       {/* ── Forfaits principaux ─────────────────────────────────────────────── */}
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {PLANS.map((plan) => (
-            <div key={plan.title} className={`relative bg-white rounded-2xl border flex flex-col overflow-hidden card-hover ${plan.featured ? 'border-[#2d6a4f] shadow-xl' : 'border-[#dde5dc]'}`}>
+          {PLANS.map((plan, i) => (
+            <div
+              key={plan.title}
+              className={`relative bg-white rounded-2xl border flex flex-col overflow-hidden card-hover animate-fade-up ${plan.featured ? 'border-[#2d6a4f] shadow-xl' : 'border-[#dde5dc]'}`}
+              style={{ animationDelay: `${i * 0.1}s` }}
+            >
               {plan.featured && (
                 <div className="absolute top-4 right-4 bg-[#2d6a4f] text-white text-xs font-bold px-3 py-1 rounded-full">★ SPÉCIALITÉ</div>
               )}
@@ -437,7 +441,7 @@ export default function TarifsPage() {
               {[
                 { seuil: '3 amis inscrits',  reward: '+1h conduite gratuite',          valeur: '(60€ de valeur)' },
                 { seuil: '5 amis inscrits',  reward: '+2h conduite gratuites',          valeur: '(120€ de valeur)' },
-                { seuil: '10 amis inscrits', reward: 'Passerelle BVA→BVM OFFERTE',      valeur: '(345€ de valeur)' },
+                { seuil: '10 amis inscrits', reward: 'Passerelle BVA→BVM OFFERTE',      valeur: '(420€ de valeur)' },
               ].map((p, i) => (
                 <div key={p.seuil}>
                   {i > 0 && <div className="h-px bg-white/10 mb-4" />}

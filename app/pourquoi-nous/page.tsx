@@ -5,7 +5,7 @@ import { Phone, Check, X, Minus } from 'lucide-react'
 
 const COMPARATIF = [
   { critere: 'Note VroomVroom', mortier: '5.0/5', fargeau: '4.8/5', cer: '4.5/5', ornikar: '3.8/5', gambetta: '4.2/5' },
-  { critere: 'Nombre d\'avis', mortier: '26 avis', fargeau: '231', cer: '~80', ornikar: 'Variable', gambetta: '~40' },
+  { critere: 'Nombre d\'avis', mortier: '32 avis', fargeau: '231', cer: '~80', ornikar: 'Variable', gambetta: '~40' },
   { critere: 'Forfait 20h BVM', mortier: '1 099€', fargeau: '1 390€', cer: '~1 400€', ornikar: '~1 100€*', gambetta: '~1 350€' },
   { critere: 'Forfait BVA 13h', mortier: '949€', fargeau: '~1 100€', cer: '~1 100€', ornikar: '~850€*', gambetta: '~1 050€' },
   { critere: 'Formule accélérée', mortier: true, fargeau: true, cer: true, ornikar: false, gambetta: null },
@@ -82,9 +82,15 @@ export default function PourquoiNousPage() {
               </thead>
               <tbody>
                 {COMPARATIF.map((row, i) => (
-                  <tr key={row.critere} className={`border-b border-[#dde5dc] ${i % 2 === 0 ? '' : 'bg-[#f7f9f5]'}`}>
+                  <tr
+                    key={row.critere}
+                    className={`border-b border-[#dde5dc] transition-colors duration-150 cursor-default
+                      hover:bg-[#2d6a4f]/5 ${i % 2 === 0 ? '' : 'bg-[#f7f9f5]'}`}
+                  >
                     <td className="p-4 font-medium text-[#1a2e22]">{row.critere}</td>
-                    <td className="p-4 bg-[#2d6a4f]/5 text-center font-bold text-[#2d6a4f]"><CellValue val={row.mortier} /></td>
+                    <td className="p-4 bg-[#2d6a4f]/8 text-center font-bold text-[#2d6a4f] transition-all duration-150 hover:bg-[#2d6a4f]/15">
+                      <CellValue val={row.mortier} />
+                    </td>
                     <td className="p-4 text-center"><CellValue val={row.fargeau} /></td>
                     <td className="p-4 text-center"><CellValue val={row.cer} /></td>
                     <td className="p-4 text-center"><CellValue val={row.ornikar} /></td>

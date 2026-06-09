@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: "Auto-école Mortier — Paris 20ème | Permis B, AAC, Accéléré | Note 5.0/5",
     template: "%s | Auto-école Mortier"
   },
-  description: "Auto-école Mortier : la meilleure auto-école du 20ème arrondissement à Paris. Certifiée Qualiopi, finançable CPF, permis à 1€/jour. Tram T3b arrêt Adrienne Bolland. Note 5.0/5 sur 26 avis. Formations Permis B, AAC, conduite accompagnée.",
+  description: "Auto-école Mortier : la meilleure auto-école du 20ème arrondissement à Paris. Certifiée Qualiopi, finançable CPF, permis à 1€/jour. Tram T3b arrêt Adrienne Bolland. Note 5.0/5 sur 32 avis. Formations Permis B, AAC, conduite accompagnée.",
   keywords: [
     "auto-école Paris 20",
     "permis B Paris",
