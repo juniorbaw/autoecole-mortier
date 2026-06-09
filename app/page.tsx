@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
   Phone, Star, Check, ArrowRight, MapPin, ChevronRight,
@@ -1123,6 +1124,79 @@ export default function HomePage() {
               Voir les 26 avis <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          DEVANTURE — AGENCE PHYSIQUE
+      ══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6" style={{ backgroundColor: 'var(--bg-main)' }}>
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="font-mono text-xs font-semibold tracking-widest uppercase" style={{ color: 'var(--brand)' }}>
+              Notre agence
+            </span>
+            <h2
+              className="font-serif italic font-black mt-2"
+              style={{ color: 'var(--dark-text)', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}
+            >
+              Venez nous voir
+            </h2>
+            <p className="mt-2" style={{ color: 'var(--secondary-text)' }}>
+              Une vraie agence, avec de vraies personnes. Tram T3b juste devant.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="relative rounded-3xl overflow-hidden shadow-2xl border"
+            style={{ borderColor: 'var(--border-color)' }}
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <Image
+              src="/devanture.jpg"
+              alt="Devanture Auto-école Mortier — 127 boulevard Mortier, Paris 20ème"
+              width={1200}
+              height={500}
+              className="w-full h-72 sm:h-96 object-cover object-center"
+              priority={false}
+            />
+            {/* Overlay info */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent px-8 py-8">
+              <div className="flex flex-wrap gap-4 items-end justify-between">
+                <div>
+                  <p className="text-white font-serif font-black text-xl mb-1">Auto-école Mortier</p>
+                  <p className="text-white/80 text-sm flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5" />
+                    127 boulevard Mortier, Paris 20ème
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { text: 'Tram T3b' },
+                    { text: 'Mar-Ven 10h-19h' },
+                    { text: 'Sam 10h-14h' },
+                  ].map(b => (
+                    <span
+                      key={b.text}
+                      className="text-xs font-semibold px-3 py-1.5 rounded-full text-white"
+                      style={{ backgroundColor: 'rgba(45,106,79,0.85)' }}
+                    >
+                      {b.text}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

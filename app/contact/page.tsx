@@ -1,10 +1,11 @@
 'use client'
 import { useState } from 'react'
+import Image from 'next/image'
 import { Phone, MapPin, Clock, Train, ChevronDown, Check, Send, Calendar, FileSignature } from 'lucide-react'
 
 const FORMATIONS_CONTACT = [
-  { label: 'Permis B manuel 1 099€', id: 'bvm' },
-  { label: 'Permis B auto 899€', id: 'bva' },
+  { label: 'Permis B manuel 1 100€', id: 'bvm' },
+  { label: 'Permis B auto 950€', id: 'bva' },
   { label: 'Accéléré 1 399€', id: 'accelere' },
   { label: 'AAC 1 199€', id: 'aac' },
   { label: 'Code seul 299€', id: 'code' },
@@ -136,6 +137,24 @@ export default function ContactPage() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Photo devanture */}
+            <div className="mb-10 rounded-2xl overflow-hidden border border-[#dde5dc] shadow-sm relative group">
+              <Image
+                src="/devanture.jpg"
+                alt="Devanture Auto-école Mortier — 127 boulevard Mortier, Paris 20ème"
+                width={800}
+                height={450}
+                className="w-full h-52 object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                priority
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-4 py-3">
+                <p className="text-white text-xs font-semibold flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                  127 boulevard Mortier — Paris 20ème · Tram T3b
+                </p>
+              </div>
             </div>
 
             {/* FAQ */}
