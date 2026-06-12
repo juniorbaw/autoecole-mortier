@@ -2,7 +2,25 @@ import type { Metadata } from 'next'
 import { Phone, Check, Car, Zap, Rocket, Users, Euro, Eye, Repeat, Smartphone, RefreshCcw } from 'lucide-react'
 import TiltCard from '@/components/TiltCard'
 
-export const metadata: Metadata = { title: 'Formations' }
+export const metadata: Metadata = {
+  title: 'Formations Permis B — Manuel, Automatique, Accéléré, AAC',
+  description:
+    'Toutes nos formations permis B à Paris 20 : permis B manuel, automatique, conduite accompagnée (AAC), formule accélérée. Certifié Qualiopi, finançable CPF. Auto-école Mortier.',
+  keywords: [
+    'formation permis B Paris 20',
+    'permis B manuel Paris',
+    'permis B automatique Paris 20',
+    'conduite accompagnée AAC Paris 20',
+    'permis accéléré Paris',
+    'code de la route Paris 20',
+  ],
+  alternates: { canonical: 'https://autoecole-mortier.vercel.app/formations' },
+  openGraph: {
+    url: 'https://autoecole-mortier.vercel.app/formations',
+    title: 'Formations Permis B — Auto-école Mortier Paris 20',
+    description: 'Permis B manuel, automatique, accéléré, AAC. Certifié Qualiopi. Paris 20ème.',
+  },
+}
 
 const FORMATIONS = [
   { Icon: Car,        tag: 'Best-seller', tagColor: 'bg-[#2d6a4f]/10 text-[#2d6a4f]', title: 'Permis B Manuel', price: '1 099€', sub: 'Numéro NEPH + code en salle inclus', features: ['Code de la route inclus', '20h de conduite minimum', 'Accompagnement à l\'examen', 'Finançable CPF', 'Compatible permis 1€/jour', 'Moniteurs certifiés'] },
