@@ -9,6 +9,7 @@ import OffresPopup from "@/components/OffresPopup";
 import ScrollProgress from "@/components/ScrollProgress";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from '@vercel/analytics/react';
+import JsonLd from "@/components/JsonLd";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,36 +26,44 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://autoecole-mortier.vercel.app"),
   title: {
     default: "Auto-école Mortier — Paris 20ème | Permis B, AAC, Accéléré | Note 5.0/5",
-    template: "%s | Auto-école Mortier"
+    template: "%s | Auto-école Mortier — Paris 20ème"
   },
-  description: "Auto-école Mortier : la meilleure auto-école du 20ème arrondissement à Paris. Certifiée Qualiopi, finançable CPF, permis à 1€/jour. Tram T3b arrêt Adrienne Bolland. Note 5.0/5 sur 32 avis. Formations Permis B, AAC, conduite accompagnée.",
+  description: "Auto-école Mortier : la mieux notée du 20ème arrondissement (5.0/5 — 26 avis). Certifiée Qualiopi, finançable CPF, permis à 1€/jour. Tram T3b arrêt Adrienne Bolland, Paris 20.",
   keywords: [
     "auto-école Paris 20",
+    "auto école Paris 20ème",
     "permis B Paris",
-    "permis 1€/jour",
-    "auto-école Mortier",
-    "Qualiopi",
-    "CPF formation",
-    "AAC accompagnée",
-    "conduite Paris",
-    "permis accéléré",
-    "code en ligne"
+    "permis pas cher Paris 20",
+    "auto école boulevard Mortier",
+    "auto école Ménilmontant",
+    "auto école tram T3b",
+    "auto école T3b Adrienne Bolland",
+    "permis à 1€ par jour",
+    "permis 1 euro jour Paris",
+    "auto-école Qualiopi Paris",
+    "permis finançable CPF Paris",
+    "auto école pas cher 20ème",
+    "permis B accéléré Paris",
+    "conduite accompagnée Paris 20",
+    "AAC Paris 20",
+    "code de la route Paris 20",
   ],
-  authors: [{ name: "Auto-école Mortier" }],
+  authors: [{ name: "Auto-école Mortier", url: "https://autoecole-mortier.vercel.app" }],
   creator: "Auto-école Mortier",
   publisher: "Auto-école Mortier",
   openGraph: {
     type: "website",
     locale: "fr_FR",
     url: "https://autoecole-mortier.vercel.app",
-    title: "Auto-école Mortier — Paris 20ème | Permis B avec la meilleure note",
-    description: "Auto-école certifiée Qualiopi à Paris 20. Permis à 1€/jour, CPF accepté, note 5.0/5. Tram T3b arrêt Adrienne Bolland.",
+    title: "Auto-école Mortier — Paris 20ème | La mieux notée du 20ème",
+    description: "Auto-école certifiée Qualiopi, finançable CPF, note 5.0/5. Permis à 1€/jour. Tram T3b Adrienne Bolland — Paris 20ème.",
     siteName: "Auto-école Mortier",
     images: [
       {
-        url: "https://autoecole-mortier.vercel.app/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Auto-école Mortier - Paris 20ème",
@@ -66,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Auto-école Mortier — Paris 20ème",
     description: "Permis B certifié Qualiopi, CPF accepté, permis à 1€/jour. Note 5.0/5 sur Google.",
-    images: ["https://autoecole-mortier.vercel.app/og-image.png"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -115,6 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <OffresPopup />
         </ThemeProvider>
         <Analytics />
+        <JsonLd />
       </body>
     </html>
   );
