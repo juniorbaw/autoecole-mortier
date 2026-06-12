@@ -2,7 +2,24 @@ import type { Metadata } from 'next'
 import { Check, Phone, AlertTriangle, BookOpen, Car, Zap, Rocket, CreditCard, Banknote, Landmark, FileText, GraduationCap, Euro, Info, Monitor } from 'lucide-react'
 import TiltCard from '@/components/TiltCard'
 
-export const metadata: Metadata = { title: 'Tarifs' }
+export const metadata: Metadata = {
+  title: 'Tarifs Permis B — Prix transparents dès 949€ | Paris 20',
+  description:
+    'Tarifs permis B à Paris 20 : Permis B Automatique 13h dès 949€, Manuel 20h dès 1099€, Code en ligne 50€. Permis à 1€/jour disponible. Auto-école Mortier, Paris 20ème.',
+  keywords: [
+    'tarif permis B Paris 20',
+    'prix permis B Paris',
+    'permis pas cher Paris 20',
+    'permis à 1 euro jour Paris',
+    'code de la route prix Paris 20',
+  ],
+  alternates: { canonical: 'https://autoecole-mortier.vercel.app/tarifs' },
+  openGraph: {
+    url: 'https://autoecole-mortier.vercel.app/tarifs',
+    title: 'Tarifs Permis B — Auto-école Mortier Paris 20',
+    description: 'Permis B dès 949€. Automatique, Manuel, Code. Permis à 1€/jour disponible.',
+  },
+}
 
 // ── Forfaits principaux ───────────────────────────────────────────────────────
 const PLANS = [
