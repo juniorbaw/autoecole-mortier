@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     canonical: "https://autoecole-mortier.vercel.app",
   },
   verification: {
-    google: "verification-code-if-any",
+    google: "vml1zWMaDaGeZfbLw3UJPOD6HhFuG2it0gMDUzTpdGs",
   },
   category: "Education",
 };
