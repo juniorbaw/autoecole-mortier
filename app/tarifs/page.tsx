@@ -37,7 +37,7 @@ const PLANS = [
   },
   {
     Icon: Rocket, title: 'Formule Accélérée', price: '1 399€', sub: 'Code + conduite en 2-4 semaines', featured: false,
-    features: ['Numéro NEPH inclus', 'Stage code 3 jours en salle', 'Conduite quotidienne intensive', 'Date examen prioritaire', 'Finançable CPF'],
+    features: ['Numéro NEPH inclus', 'Code en ligne inclus', 'Conduite quotidienne intensive', 'Date examen prioritaire', 'Finançable CPF'],
   },
 ]
 

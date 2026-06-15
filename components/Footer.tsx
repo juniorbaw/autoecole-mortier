@@ -57,8 +57,15 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm mb-4">Formations</h4>
             <ul className="space-y-2 text-sm">
-              {['Permis B Manuel', 'Permis B Automatique', 'Formule Accélérée', 'Conduite Accompagnée', 'Permis à 1€/jour', 'Code en ligne'].map(f => (
-                <li key={f}><Link href="/formations" className="hover:text-white transition-colors">{f}</Link></li>
+              {[
+                { label: 'Permis B Manuel', href: '/formations' },
+                { label: 'Permis B Automatique', href: '/formations' },
+                { label: 'Formule Accélérée', href: '/formations' },
+                { label: 'Conduite Accompagnée', href: '/formations' },
+                { label: 'Permis à 1€/jour', href: '/formations' },
+                { label: 'Code en ligne', href: '/code-en-ligne' },
+              ].map(f => (
+                <li key={f.label}><Link href={f.href} className="hover:text-white transition-colors">{f.label}</Link></li>
               ))}
             </ul>
           </div>

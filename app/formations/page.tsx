@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Phone, Check, Car, Zap, Rocket, Users, Euro, Eye, Repeat, Smartphone, RefreshCcw } from 'lucide-react'
+import Link from 'next/link'
+import { Phone, Check, Car, Zap, Rocket, Users, Euro, Eye, Repeat, Smartphone, RefreshCcw, ExternalLink } from 'lucide-react'
 import TiltCard from '@/components/TiltCard'
 
 export const metadata: Metadata = {
@@ -25,12 +26,12 @@ export const metadata: Metadata = {
 const FORMATIONS = [
   { Icon: Car,        tag: 'Best-seller', tagColor: 'bg-[#2d6a4f]/10 text-[#2d6a4f]', title: 'Permis B Manuel', price: '1 099€', sub: 'Numéro NEPH + code en salle inclus', features: ['Code de la route inclus', '20h de conduite minimum', 'Accompagnement à l\'examen', 'Finançable CPF', 'Compatible permis 1€/jour', 'Moniteurs certifiés'] },
   { Icon: Zap,        tag: 'Spécialité', tagColor: 'bg-blue-100 text-blue-700', title: 'Permis B Automatique', price: '949€', sub: 'Notre spécialité — 13h minimum', features: ['Code de la route inclus', '13h de conduite minimum', 'Plus accessible', 'Idéal mobilité urbaine', 'Finançable CPF', 'Compatible permis 1€/jour'] },
-  { Icon: Rocket,     tag: 'Express', tagColor: 'bg-indigo-100 text-indigo-700', title: 'Formule Accélérée', price: '1 399€', sub: 'Permis en 2 à 4 semaines', features: ['Stage code 3 jours', 'Conduite quotidienne intensive', 'Date examen prioritaire', 'Finançable CPF', 'Résultat en 2-4 semaines', 'Suivi personnalisé'] },
+  { Icon: Rocket,     tag: 'Express', tagColor: 'bg-indigo-100 text-indigo-700', title: 'Formule Accélérée', price: '1 399€', sub: 'Permis en 2 à 4 semaines', features: ['Code en ligne inclus', 'Conduite quotidienne intensive', 'Date examen prioritaire', 'Finançable CPF', 'Résultat en 2-4 semaines', 'Suivi personnalisé'] },
   { Icon: Users,      tag: 'Recommandé', tagColor: 'bg-green-100 text-green-700', title: 'Conduite Accompagnée AAC', price: '1 199€', sub: 'Dès 15 ans — La plus économique', features: ['Dès 15 ans', 'Accompagné par un proche', 'Conduite supervisée incluse', 'Finançable CPF', 'Moins d\'heures payantes', 'Bonus assurance'] },
   { Icon: Euro,       tag: '15-25 ans', tagColor: 'bg-green-100 text-green-700', title: 'Permis à 1€/jour', price: '~30€/mois', sub: 'Prêt à taux zéro — pour les 15-25 ans', features: ['Prêt sans intérêt', 'Pour les 15-25 ans', 'On monte le dossier', 'Banque partenaire', 'Remboursement flexible', 'Zéro frais de dossier'] },
   { Icon: Eye,        tag: 'Post-permis', tagColor: 'bg-gray-100 text-gray-700', title: 'Conduite Supervisée', price: 'Sur devis', sub: 'Pour les permis récents', features: ['Après l\'obtention du permis', 'Réduction franchise assurance', 'Accompagné par un proche', 'Période probatoire accélérée', 'Conseils personnalisés', 'Flexibilité totale'] },
   { Icon: Repeat,     tag: 'Passerelle', tagColor: 'bg-orange-100 text-orange-700', title: 'Passerelle BVA→BVM', price: '420€', sub: 'Passer de l\'automatique au manuel', features: ['7h de conduite minimum', 'Examen pratique uniquement', 'Rapide et efficace', 'Moniteurs experts', 'Flexibilité des créneaux', 'Attestation officielle'] },
-  { Icon: Smartphone, tag: 'En ligne', tagColor: 'bg-purple-100 text-purple-700', title: 'Code en ligne', price: '50€', sub: 'Accès plateforme illimité', features: ['Accès illimité en ligne', 'Exercices thématiques', 'Statistiques de progression', 'Compatible mobile', 'Disponible 24h/24', 'Mises à jour incluses'] },
+  { Icon: Smartphone, tag: 'En ligne', tagColor: 'bg-purple-100 text-purple-700', title: 'Code en ligne', price: '50€', sub: 'Accès plateforme illimité', link: '/code-en-ligne', features: ['Accès illimité en ligne', 'Exercices thématiques', 'Statistiques de progression', 'Compatible mobile', 'Disponible 24h/24', 'Mises à jour incluses'] },
   { Icon: RefreshCcw, tag: 'Récupération', tagColor: 'bg-red-100 text-red-700', title: 'Annulation de Permis', price: 'Sur devis', sub: 'Récupérer son permis annulé', features: ['Bilan de compétences', 'Stage de sensibilisation', 'Accompagnement juridique', 'Suivi personnalisé', 'Démarches administratives', 'Discrétion assurée'] },
 ]
 
@@ -77,14 +78,22 @@ export default function FormationsPage() {
                   ))}
                 </ul>
               </div>
-              <div className="border-t border-[#dde5dc] p-6 flex items-center justify-between">
+              <div className="border-t border-[#dde5dc] p-6 flex items-center justify-between gap-2">
                 <div>
                   <span className="font-serif text-2xl font-black text-[#2d6a4f]">{f.price}</span>
                 </div>
-                <a href="tel:0182833126" className="flex items-center gap-1.5 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-semibold px-4 py-2 rounded-[10px] transition-colors text-sm">
-                  <Phone className="w-3.5 h-3.5" />
-                  S&apos;inscrire
-                </a>
+                <div className="flex items-center gap-2">
+                  {(f as { link?: string }).link && (
+                    <Link href={(f as { link?: string }).link!} className="flex items-center gap-1 text-xs font-semibold text-[#2d6a4f] hover:underline">
+                      <ExternalLink className="w-3 h-3" />
+                      Détails
+                    </Link>
+                  )}
+                  <a href="tel:0182833126" className="flex items-center gap-1.5 bg-[#2d6a4f] hover:bg-[#1b4332] text-white font-semibold px-4 py-2 rounded-[10px] transition-colors text-sm">
+                    <Phone className="w-3.5 h-3.5" />
+                    S&apos;inscrire
+                  </a>
+                </div>
               </div>
             </TiltCard>
           ))}
