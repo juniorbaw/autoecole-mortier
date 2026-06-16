@@ -11,8 +11,12 @@ export default function ScrollProgress() {
       setProgress(total > 0 ? Math.min((scrolled / total) * 100, 100) : 0)
     }
     window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
     update()
-    return () => window.removeEventListener('scroll', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
   }, [])
 
   return (

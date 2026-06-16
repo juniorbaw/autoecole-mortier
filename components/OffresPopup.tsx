@@ -7,17 +7,25 @@ export default function OffresPopup() {
   const [isVisible, setIsVisible] = useState(false)
   
   useEffect(() => {
-    // Afficher le popup après 3 secondes si pas encore vu dans cette session
+    // Afficher le popup quelques secondes après le chargement, si pas encore vu dans cette session
     const hasSeenPopup = sessionStorage.getItem('offresPopupSeen')
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
         setIsVisible(true)
-      }, 3000)
-      
+      }, 6000)
+
       return () => clearTimeout(timer)
     }
   }, [])
-  
+
+  useEffect(() => {
+    if (isVisible) {
+      const previousOverflow = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      return () => { document.body.style.overflow = previousOverflow }
+    }
+  }, [isVisible])
+
   const handleClose = () => {
     setIsVisible(false)
     sessionStorage.setItem('offresPopupSeen', 'true')
@@ -36,8 +44,8 @@ export default function OffresPopup() {
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[70]" onClick={handleClose} />
       
       {/* Popup */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[80] w-full max-w-lg mx-4">
-        <div className="bg-white rounded-2xl shadow-2xl border border-[#dde5dc] overflow-hidden animate-scale-in">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[80] w-full max-w-lg mx-4 max-h-[90vh]">
+        <div className="bg-white rounded-2xl shadow-2xl border border-[#dde5dc] overflow-y-auto max-h-[90vh] animate-scale-in">
           {/* Header avec gradient */}
           <div className="bg-gradient-to-r from-[#2d6a4f] to-[#52b788] text-white p-6 text-center relative">
             <button
