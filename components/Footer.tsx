@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Phone, MapPin, Clock, Train, Instagram } from 'lucide-react'
+import { Phone, MapPin, Clock, Train, Mail, Instagram } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -75,6 +75,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-3">
               <li><a href="tel:0182833126" className="flex items-center gap-2 text-sm hover:text-white transition-colors"><Phone className="w-4 h-4 text-[#2d6a4f]" />01 82 83 31 26</a></li>
+              <li><a href="mailto:autoecolemortier@gmail.com" className="flex items-center gap-2 text-sm hover:text-white transition-colors"><Mail className="w-4 h-4 text-[#2d6a4f]" />autoecolemortier@gmail.com</a></li>
               <li className="flex items-start gap-2 text-sm"><MapPin className="w-4 h-4 text-[#2d6a4f] mt-0.5 flex-shrink-0" />127 bd Mortier, 75020 Paris</li>
               <li className="flex items-start gap-2 text-sm"><Clock className="w-4 h-4 text-[#2d6a4f] mt-0.5 flex-shrink-0" />Mar-Ven 10h-14h / 16h-19h<br />Sam 10h-14h</li>
               <li className="flex items-center gap-2 text-sm"><Train className="w-4 h-4 text-[#2d6a4f]" />Tram T3b — Arrêt devant</li>
