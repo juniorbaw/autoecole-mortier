@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
-import { Phone, MapPin, Clock, Train, ChevronDown, Check, Send, Calendar, FileSignature } from 'lucide-react'
+import { Phone, MapPin, Clock, Train, Mail, ChevronDown, Check, Send, Calendar, FileSignature } from 'lucide-react'
 
 const FORMATIONS_CONTACT = [
   { label: 'Permis B manuel 1 099€', id: 'bvm' },
@@ -22,8 +22,8 @@ const FINANCEMENTS_CONTACT = [
 
 const FAQS = [
   { q: 'Combien de temps pour avoir le permis ?', a: 'En moyenne 2-3 mois. En accéléré, 3-4 semaines. Tout dépend de votre rythme et disponibilité.' },
-  { q: 'Puis-je utiliser mon CPF ?', a: 'Oui ! Nous sommes certifiés Qualiopi. Oumy vous aide dans toutes les démarches CPF, c\'est gratuit et simple.' },
-  { q: 'Avez-vous des facilités de paiement ?', a: 'Oui, paiement en plusieurs fois possible. CB, espèces, chèque, virement, CPF, permis 1€/jour — on s\'adapte à votre situation.' },
+  { q: 'Puis-je utiliser mon CPF ?', a: "Oui ! Nous sommes certifiés Qualiopi. Oumy vous aide dans toutes les démarches CPF, c'est gratuit et simple." },
+  { q: 'Avez-vous des facilités de paiement ?', a: "Oui, paiement en plusieurs fois possible. CB, espèces, chèque, virement, CPF, permis 1€/jour — on s'adapte à votre situation." },
   { q: 'Je veux convertir mon permis étranger ?', a: 'Nous accompagnons les titulaires de permis étrangers dans leurs démarches. Appelez-nous pour un devis personnalisé.' },
 ]
 
@@ -92,10 +92,10 @@ export default function ContactPage() {
         }),
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Erreur lors de l\'envoi')
+      if (!res.ok) throw new Error(data.error || "Erreur lors de l'envoi")
       setSent(true)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de l\'envoi')
+      setError(err instanceof Error ? err.message : "Erreur lors de l'envoi")
     } finally {
       setSending(false)
     }
@@ -109,6 +109,11 @@ export default function ContactPage() {
           <span className="font-mono text-xs text-[#2d6a4f] font-semibold tracking-widest uppercase">Contact</span>
           <h1 className="font-serif text-4xl sm:text-5xl font-black text-[#1a2e22] mt-2 mb-4">Prenons contact</h1>
           <p className="text-[#4a5a52] text-lg max-w-xl mx-auto">Oumy vous recontactera sous 24h. Ou appelez directement au 01 82 83 31 26.</p>
+          <a href="mailto:autoecolemortier@gmail.com"
+            className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-full bg-[#2d6a4f]/10 border border-[#2d6a4f]/30 text-[#2d6a4f] font-semibold text-sm hover:bg-[#2d6a4f]/20 transition-colors">
+            <Mail className="w-4 h-4" />
+            autoecolemortier@gmail.com
+          </a>
         </div>
       </section>
 
@@ -121,9 +126,10 @@ export default function ContactPage() {
             <div className="space-y-3 mb-10">
               {[
                 { icon: <Phone className="w-5 h-5 text-[#2d6a4f]" />, label: 'Téléphone', value: '01 82 83 31 26', href: 'tel:0182833126' },
+                { icon: <Mail className="w-5 h-5 text-[#2d6a4f]" />, label: 'Email', value: 'autoecolemortier@gmail.com', href: 'mailto:autoecolemortier@gmail.com' },
                 { icon: <MapPin className="w-5 h-5 text-[#2d6a4f]" />, label: 'Adresse', value: '127 boulevard Mortier, 75020 Paris', href: 'https://maps.google.com/?q=127+boulevard+Mortier+Paris' },
-                { icon: <Clock className="w-5 h-5 text-[#2d6a4f]" />, label: 'Horaires', value: 'Mar-Ven 10h-14h / 16h-19h · Sam 10h-14h', href: null },
-                { icon: <Train className="w-5 h-5 text-[#2d6a4f]" />, label: 'Accès', value: 'Tram T3b — Arrêt devant l\'auto-école', href: null },
+                { icon: <Clock className="w-5 h-5 text-[#2d6a4f]" />, label: 'Horaires', value: "Mar-Ven 10h-14h / 16h-19h · Sam 10h-14h", href: null },
+                { icon: <Train className="w-5 h-5 text-[#2d6a4f]" />, label: 'Accès', value: "Tram T3b — Arrêt devant l'auto-école", href: null },
               ].map(({ icon, label, value, href }) => (
                 <div key={label} className="bg-white border border-[#dde5dc] rounded-xl p-4 flex items-center gap-4 hover:translate-x-1 transition-transform">
                   <div className="w-10 h-10 rounded-lg bg-[#2d6a4f]/10 flex items-center justify-center flex-shrink-0">{icon}</div>
@@ -293,7 +299,7 @@ export default function ContactPage() {
                   <button type="submit" disabled={sending}
                     className="w-full flex items-center justify-center gap-2 bg-[#2d6a4f] hover:bg-[#1b4332] disabled:opacity-50 text-white font-bold py-4 rounded-xl transition-colors">
                     <Send className="w-4 h-4" />
-                    {sending ? 'Envoi en cours...' : 'Envoyer ma demande d\'inscription'}
+                    {sending ? 'Envoi en cours...' : "Envoyer ma demande d'inscription"}
                   </button>
                   <p className="text-xs text-[#8a9690] text-center">Oumy vous recontactera sous 24h</p>
                 </form>
