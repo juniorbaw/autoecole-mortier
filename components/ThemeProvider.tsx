@@ -15,8 +15,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem('mortier-theme') as Theme | null
-    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    const initial = saved ?? preferred
+    const initial: Theme = saved ?? 'light'
     setTheme(initial)
     document.documentElement.setAttribute('data-theme', initial)
   }, [])
