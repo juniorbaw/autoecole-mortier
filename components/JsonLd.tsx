@@ -11,7 +11,7 @@ export default function JsonLd() {
           'Auto-école certifiée Qualiopi à Paris 20ème. Permis B manuel et automatique, conduite accompagnée (AAC), formule accélérée. Financement CPF et permis à 1€/jour disponibles. La mieux notée du 20ème arrondissement.',
         url: 'https://autoecole-mortier.vercel.app',
         telephone: '+33182833126',
-        email: 'contact@autoecole-mortier.fr',
+        email: 'autoecolemortier@gmail.com',
         address: {
           '@type': 'PostalAddress',
           streetAddress: '127 boulevard Mortier',
@@ -48,7 +48,7 @@ export default function JsonLd() {
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '5.0',
-          reviewCount: '26',
+          reviewCount: '32',
           bestRating: '5',
           worstRating: '1',
         },
@@ -140,7 +140,7 @@ export default function JsonLd() {
             name: "L'auto-école Mortier est-elle bien notée ?",
             acceptedAnswer: {
               '@type': 'Answer',
-              text: "Oui, Auto-école Mortier est notée 5.0/5 sur Google avec 26 avis vérifiés. C'est la mieux notée du 20ème arrondissement de Paris.",
+              text: "Oui, Auto-école Mortier est notée 5.0/5 sur Google avec 32 avis vérifiés. C'est la mieux notée du 20ème arrondissement de Paris.",
             },
           },
         ],
@@ -154,4 +154,4 @@ export default function JsonLd() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   )
-}
+          }
