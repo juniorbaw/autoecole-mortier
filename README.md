@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auto-École Mortier : Digital Transformation & Growth 🚗📈
 
-## Getting Started
+> **🇫🇷 Résumé (FR) :** Transformation digitale complète d'une auto-école parisienne. Remplacement du site obsolète par une application web Next.js performante, mise en place d'une stratégie SEO Local (Google My Business), refonte du pricing et création d'un programme de parrainage. Objectif : acquisition de leads pilotée par la donnée.
 
-First, run the development server:
+**A full digital overhaul transforming a traditional local business into a data-driven lead generation machine.**
+
+🔗 **Live Website:** https://autoecole-mortier.vercel.app/formations
+
+---
+
+## 🎯 Business Problem
+Auto-École Mortier relied heavily on foot traffic and word-of-mouth. Their digital presence was non-existent, leading to a loss of market share against digital-first competitors (like Ornikar). They needed a scalable system to attract, convert, and retain students online.
+
+## 💡 Strategy & Implementation
+
+This project was not just about writing code; it was a 90-day comprehensive growth plan:
+
+1. **Web Development:** Built a fast, responsive landing page and website using **Next.js** to ensure optimal performance and technical SEO.
+2. **Local SEO (GMB):** Claimed, verified, and optimized the Google My Business profile to capture hyper-local search intent ("auto école Paris [Arrondissement]").
+3. **Data-Driven Pricing:** Analyzed competitor pricing data to restructure the school's offers, making them highly competitive while maintaining margins.
+4. **Growth Loops:** Implemented an automated referral program to leverage the existing student base for new acquisitions.
+5. **Social Media:** Designed an Instagram strategy to engage with the target demographic (18-25 years old).
+
+---
+
+## 🛠 Tech Stack & Tools
+
+*   **Frontend:** Next.js, React, Tailwind CSS (or standard CSS, *adjust if needed*)
+*   **Hosting:** Vercel
+*   **Growth/Analytics:** Google My Business, Google Analytics (GA4), Instagram Meta Business Suite
+
+---
+
+## 📈 Quantified Results (Business Impact)
+
+*   🚀 **Lead Generation:** Generated **+[Insert Number]%** increase in qualified online inquiries within the first 3 months.
+*   🌍 **SEO Ranking:** Reached the top **[Insert Rank, e.g., Top 3]** results on Google Maps for local queries.
+*   ⚡ **Performance:** Improved website loading speed to under **[Insert Time, e.g., 1.5s]**, significantly reducing the bounce rate.
+*   💰 **Conversion:** The new referral program accounted for **[Insert %]** of new sign-ups in Q1.
+
+*(Note: The numbers above are placeholders. In data-driven roles, real metrics are the strongest proof of competence.)*
+
+---
+
+## 🚀 Local Setup
 
 ```bash
+# Clone the repository
+git clone [https://github.com/juniorbaw/autoecole-mortier.git](https://github.com/juniorbaw/autoecole-mortier.git)
+
+# Install dependencies
+npm install
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
