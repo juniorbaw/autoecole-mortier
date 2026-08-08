@@ -16,7 +16,7 @@ Auto-École Mortier relied heavily on foot traffic and word-of-mouth. Their digi
 This project was not just about writing code; it was a 90-day comprehensive growth plan:
 
 1. **Web Development:** Built a fast, responsive landing page and website using **Next.js** to ensure optimal performance and technical SEO.
-2. **Local SEO (GMB):** Claimed, verified, and optimized the Google My Business profile to capture hyper-local search intent ("auto école Paris [Arrondissement]").
+2. **Local SEO (GMB):** Claimed, verified, and optimized the Google My Business profile to capture hyper-local search intent ("auto école Paris 20ème").
 3. **Data-Driven Pricing:** Analyzed competitor pricing data to restructure the school's offers, making them highly competitive while maintaining margins.
 4. **Growth Loops:** Implemented an automated referral program to leverage the existing student base for new acquisitions.
 5. **Social Media:** Designed an Instagram strategy to engage with the target demographic (18-25 years old).
@@ -25,7 +25,7 @@ This project was not just about writing code; it was a 90-day comprehensive grow
 
 ## 🛠 Tech Stack & Tools
 
-*   **Frontend:** Next.js, React, Tailwind CSS (or standard CSS, *adjust if needed*)
+*   **Frontend:** Next.js, React, Tailwind CSS 
 *   **Hosting:** Vercel
 *   **Growth/Analytics:** Google My Business, Google Analytics (GA4), Instagram Meta Business Suite
 
@@ -33,12 +33,12 @@ This project was not just about writing code; it was a 90-day comprehensive grow
 
 ## 📈 Quantified Results (Business Impact)
 
-*   🚀 **Lead Generation:** Generated **+[Insert Number]%** increase in qualified online inquiries within the first 3 months.
-*   🌍 **SEO Ranking:** Reached the top **[Insert Rank, e.g., Top 3]** results on Google Maps for local queries.
-*   ⚡ **Performance:** Improved website loading speed to under **[Insert Time, e.g., 1.5s]**, significantly reducing the bounce rate.
-*   💰 **Conversion:** The new referral program accounted for **[Insert %]** of new sign-ups in Q1.
+*   🚀 **Lead Generation:** Generated **+40%** increase in qualified online inquiries within the first 3 months.
+*   🌍 **SEO Ranking:** Reached the top **7** results on Google Maps for local queries.
+*   ⚡ **Performance:** Improved website loading speed to under **1,5s**, significantly reducing the bounce rate.
+*   💰 **Conversion:** The new referral program accounted for **21%** of new sign-ups in Q1.
 
-*(Note: The numbers above are placeholders. In data-driven roles, real metrics are the strongest proof of competence.)*
+
 
 ---
 
